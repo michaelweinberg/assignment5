@@ -182,8 +182,8 @@ def recursive_division(map, x, y, width, height, wall_value):
     recursive_division(map, wall_x+1, wall_y+1, x+width-wall_x-1, y+height-wall_y-1, wall_value)
 
 def run():
-    width_map = 11
-    height_map = 15
+    width_map = 11"""always odd numbers"""
+    height_map = 15"""always odd numbers"""
     map = Map(width_map, height_map)
     do_recursive_division(map)
     map.set_room()
