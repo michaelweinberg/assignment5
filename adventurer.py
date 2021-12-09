@@ -1,11 +1,11 @@
 class Adventurer:
 
-    def __init__(self, dungeon_adventure):
+    def __init__(self):
         self.__health = 100
         self.__is_dead = False
         self.__number_vaccine = 0
         self.__number_vision_potion = 0
-        self.__dungeon_adventure = dungeon_adventure
+        # self.__dungeon_adventure = dungeon_adventure
         self.__pillars = []
 
     def get_health(self):
