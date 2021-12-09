@@ -1,11 +1,11 @@
+from map import Map
 from room import Room
-from maze import Maze
 
 class Dungeon:
 
-        def __init__(self, row_count, col_count):
+        def __init__(self, width, height):
 
-            self.__maze = Maze.build(row_count, col_count)
+            self.__map = Map(width, height)
             self.__x_y_position = [0, 0]
 
         def traverse(self, row, col):
