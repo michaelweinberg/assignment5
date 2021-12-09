@@ -1,26 +1,40 @@
-from assignment5.assignment5.map import Map
-from assignment5.assignment5.room import Room
+from map import Map
+from room import Room
 
+class Dungeon:
 
-def run():
-    width_map = 11
-    height_map = 11
-    map = Map(width_map, height_map)
-    map.do_recursive_division()
-    map.set_room()
-    map.show_map()
+        def __init__(self, width, height):
 
-if __name__ == "__main__":
-    run()
+            self.__map = Map(width, height)
+            self.__x_y_position = [0, 0]
 
+        def traverse(self, row, col):
+            found_exit = False
+            if self.is_valid_room(row, col):
+                self.__maze[row][col].set_visited(True)
+                #check for exit
+                if self.__maze[row][col].is_exit():
+                    return True
+                #not an exit so try another room
+                found_exit = self.traverse(row + 1, col)#south
+                self.__x_y_position[1] -= 1
+                if not found_exit:
+                    found_exit = self.traverse(row, col + 1)
+                    self.__x_y_position[1] += 1#east
+                if not found_exit:
+                    found_exit = self.traverse(row - 1, col)
+                    self.__x_y_position[1] += 1#north
+                if not found_exit:
+                    found_exit = self.traverse(row, col-1)
+                    self.__x_y_position[0] -= 1#west
+                if not found_exit:
+                    self.__maze[row][col].set_visited(True)
 
-# class Dungeon:
-#     def __init__(self, width, height):
-#         self.__width = width
-#         self.__height = height
-#         self.__maze = Map(self.__width, self.__height)
-#         self.__maze.do_recursive_division()
-#         self.__maze.set_room()
-#         self.__maze.show_map()
+            else:#tried to move into an invalid room
+                return False
+            return found_exit
 
+        def is_valid_room(self, row, col):
+            return 0 <= row < self.__rowCount and col >= 0 and col < self.__colCount and self.__maze[row][
+                col].can_enter()
 
