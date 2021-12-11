@@ -8,9 +8,9 @@ class Map:
     def __init__(self, width, height):
         self.__width = width
         self.__height = height
-        self.__map = [[Room(x, y) for x in range(self.__width)] for y in range(self.__height)]
-        self.__start_point = Room(None, None)
-        self.__destination = Room(None, None)
+        self.__map = [[Room(y, x) for x in range(self.__width)] for y in range(self.__height)]
+        self.start_point = Room(None, None)
+        self.destination = Room(None, None)
         self.__healing_potion = Room(None, None)
         self.__pit = Room(None, None)
         self.__pillar_abstraction = Room(None, None)
@@ -18,6 +18,8 @@ class Map:
         self.__pillar_inheritance = Room(None, None)
         self.__pillar_polymorphism = Room(None, None)
         self.__hero = None
+
+
 
     def set_width(self):
         pass
@@ -30,6 +32,11 @@ class Map:
 
     def get_height(self):
         return self.__height
+
+    def pillar_is_visited(self):
+        if self.__pillar_inheritance.is_visited() and self.__pillar_polymorphism.is_visited() and \
+                self.__pillar_abstraction.is_visited() and self.__pillar_encapsulation.is_visited():
+            return True
 
     def set_map(self, room, value):
         if value == Map_entry_type.map_empty:
@@ -54,9 +61,10 @@ class Map:
             room.set_pillar_polymorphism()
 
     def is_movable(self, room):
+        print("room value", room.get_value())
         return room.get_value() != 1
 
-    def is_valid(self, x, y):
+    def is_valid(self, y, x):
         if x < 0 or x >= self.__width or y < 0 or y >= self.__height:
             return False
         return True
@@ -94,18 +102,18 @@ class Map:
         rooms = []
         for x in range(self.__width):
             for y in range(self.__height):
-                if self.is_movable(self.__map[x][y]):
-                    rooms.append(self.__map[x][y])
-        self.__start_point = random.choice(rooms)
-        self.__destination = random.choice(rooms)
+                if self.is_movable(self.__map[y][x]):
+                    rooms.append(self.__map[y][x])
+        self.start_point = random.choice(rooms)
+        self.destination = random.choice(rooms)
         self.__healing_potion = random.choice(rooms)
         self.__pit = random.choice(rooms)
         self.__pillar_abstraction = random.choice(rooms)
         self.__pillar_encapsulation = random.choice(rooms)
         self.__pillar_inheritance = random.choice(rooms)
         self.__pillar_polymorphism = random.choice(rooms)
-        self.set_map(self.__start_point, Map_entry_type.map_entrance)
-        self.set_map(self.__destination, Map_entry_type.map_exit)
+        self.set_map(self.start_point, Map_entry_type.map_entrance)
+        self.set_map(self.destination, Map_entry_type.map_exit)
         self.set_map(self.__healing_potion, Map_entry_type.map_healing_potion)
         self.set_map(self.__pit, Map_entry_type.map_pit)
         self.set_map(self.__pillar_abstraction, Map_entry_type.map_pillar_abstraction)
@@ -155,19 +163,22 @@ class Map:
         # self.set_map(self.__pillar_inheritance, Map_entry_type.map_pillar_inheritance)
         # self.set_map(self.__pillar_polymorphism, Map_entry_type.map_pillar_polymorphism)
 
-    def get_room(self, x, y):
+    # def get_room(self, x, y):
+    #     room = self.__map[y][x]
+    #     return room
+    def get_room(self, y, x):
         room = self.__map[y][x]
         return room
 
     def do_recursive_division(self):
         """draw four margin wall lines"""
         for x in range(0, self.__width):
-            self.set_map(self.get_room(x, 0), Map_entry_type.map_block)
-            self.set_map(self.get_room(x, self.__height - 1), Map_entry_type.map_block)
+            self.set_map(self.get_room(0, x), Map_entry_type.map_block)
+            self.set_map(self.get_room(self.__height - 1, x), Map_entry_type.map_block)
 
         for y in range(0, self.__height):
-            self.set_map(self.get_room(0, y), Map_entry_type.map_block)
-            self.set_map(self.get_room(self.__width - 1, y), Map_entry_type.map_block)
+            self.set_map(self.get_room(y, 0), Map_entry_type.map_block)
+            self.set_map(self.get_room(y, self.__width - 1), Map_entry_type.map_block)
         self.recursive_division(1, 1, self.__width - 2, self.__height - 2, Map_entry_type.map_block)
 
     def generate_holes(self, x, y, width, height, wall_x, wall_y):
@@ -179,7 +190,7 @@ class Map:
         adjacent_entrys = [(x - 1, wall_y), (x + width, wall_y), (wall_x, y - 1), (wall_x, y + height)]
         for i in range(4):
             adj_x, adj_y = (adjacent_entrys[i][0], adjacent_entrys[i][1])
-            if self.is_movable(self.__map[adj_x][adj_y]):
+            if self.is_movable(self.__map[adj_y][adj_x]):
                 self.set_map(self.__map[margin_entrys[i][1]][margin_entrys[i][0]], Map_entry_type.map_empty)
             else:
                 holes.append(hole_entrys[i])
@@ -204,9 +215,9 @@ class Map:
         wall_x, wall_y = (self.get_wall_index(x, width), self.get_wall_index(y, height))
         """set horizontal and vertical lines to wall"""
         for i in range(x, x + width):
-            self.set_map(self.get_room(i, wall_y), wall_value)
+            self.set_map(self.get_room(wall_y, i), wall_value)
         for i in range(y, y + height):
-            self.set_map(self.get_room(wall_x, i), wall_value)
+            self.set_map(self.get_room(i, wall_x), wall_value)
         """create three holes"""
         self.generate_holes(x, y, width, height, wall_x, wall_y)
         self.recursive_division(x, y, wall_x - x, wall_y - y, wall_value)
@@ -217,7 +228,7 @@ class Map:
 
 def run():
     width_map = 11
-    height_map = 11
+    height_map = 15
     map = Map(width_map, height_map)
     map.do_recursive_division()
     map.set_room()

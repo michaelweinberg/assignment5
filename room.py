@@ -1,14 +1,23 @@
 class Room:
-    def __init__(self, x, y):
+    def __init__(self, y, x):
         self.__coordinate_x = x
         self.__coordinate_y = y
         self.__value = 0
         self.__name = None
         self.__do = None
+        self.__is_visited = False
+
+    def get_x(self):
+        return self.__coordinate_x
+
+    def get_y(self):
+        return self.__coordinate_y
 
     def __str__(self):
         return "This is a" + self.__name + self.__do
 
+    def is_visited(self):
+        self.__is_visited = True
 
     def set_empty(self):
         self.__value = 0
