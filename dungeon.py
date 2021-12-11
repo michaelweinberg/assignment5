@@ -1,26 +1,33 @@
-from assignment5.assignment5.map import Map
-from assignment5.assignment5.room import Room
+from map import Map
+from room import Room
 
+class Dungeon:
 
-def run():
-    width_map = 11
-    height_map = 11
-    map = Map(width_map, height_map)
-    map.do_recursive_division()
-    map.set_room()
-    map.show_map()
+        def __init__(self, width, height):
 
-if __name__ == "__main__":
-    run()
+            self.__maze = Map(width, height)
+            self.__x_y_position = [0, 0]
+            self.__exit_position = [4, 1]
 
+        def traverse(self, x, y):
+            found_exit = False
+            if 1 == 1:
+                self.__x_y_position[0] += x
+                self.__x_y_position[1] += y
+                self.print_position()
+                if (self.__x_y_position[0] == self.__exit_position[0]
+                        and self.__x_y_position[1] == self.__exit_position[1]):
+                    print("we found the exit")
+                    return True
+            else:#tried to move into an invalid room
+                return False
+            return found_exit
 
-# class Dungeon:
-#     def __init__(self, width, height):
-#         self.__width = width
-#         self.__height = height
-#         self.__maze = Map(self.__width, self.__height)
-#         self.__maze.do_recursive_division()
-#         self.__maze.set_room()
-#         self.__maze.show_map()
+        def is_valid_room(self, row, col):
+            return True
+            # return 0 <= row < self.__rowCount and col >= 0 and col < self.__colCount and self.__maze[row][
+            #     col].can_enter()
 
+        def print_position(self):
+                print("X position is " + str(self.__x_y_position[0]) + " Y position is " + str(self.__x_y_position[1]))
 
