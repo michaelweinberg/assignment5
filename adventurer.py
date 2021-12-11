@@ -8,7 +8,7 @@ class Adventurer:
         self.__is_dead = False
         self.__number_vaccine = 0
         self.__number_vision_potion = 0
-        self.__pillar_found = None
+        self.__pillars = []
 
     def get_x(self):
         return self.__x
@@ -25,9 +25,29 @@ class Adventurer:
     def get_health(self):
         return self.__health
 
-    def set_health(self, health_reset):
-        self.__health = health_reset
+    def set_health(self, health):
+        self.__health += health
+        if self.__health <= 0:
+            self.die()
 
-    def show_hero(self, maze):
-        position = maze.get_room(self.__y, self.__x)
-        position.set_value(10)
+    def set_vaccine_points(self, vaccine_points):
+        self.__number_vaccine += vaccine_points
+
+    def use_vaccine(self):
+        # currently just use all the vaccine, could change this
+        self.__health += self.__number_vaccine
+        self.__number_vaccine = 0
+
+    def get_pillars(self):
+        if len(self.__pillars) == 4:
+            return True
+        else:
+            return False
+
+    def add_pillar(self, pillar):
+        if pillar not in self.__pillars:
+            self.__pillars.append(pillar)
+
+    def die(self):
+        self.__dungeon_adventure.remove_observer()
+        print("Our hero has died")

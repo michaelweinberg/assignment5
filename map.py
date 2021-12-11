@@ -8,7 +8,7 @@ class Map:
     def __init__(self, width, height):
         self.__width = width
         self.__height = height
-        self.__map = [[Room(x, y) for x in range(self.__width)] for y in range(self.__height)]
+        self.__map = [[Room(y, x) for x in range(self.__width)] for y in range(self.__height)]
         self.start_point = Room(None, None)
         self.destination = Room(None, None)
         self.__healing_potion = Room(None, None)
@@ -61,6 +61,7 @@ class Map:
             room.set_pillar_polymorphism()
 
     def is_movable(self, room):
+        print("room value", room.get_value())
         return room.get_value() != 1
 
     def is_valid(self, y, x):
