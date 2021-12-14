@@ -1,4 +1,3 @@
-
 class Adventurer:
 
     def __init__(self, y, x):
@@ -74,5 +73,3 @@ class Adventurer:
             self.add_health()
         if hero_move.get_value() == 5:
             self.min_health()
-
-
