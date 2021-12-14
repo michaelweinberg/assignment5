@@ -1,6 +1,10 @@
-class Adventurer:
+from observer import Observer
+
+class Adventurer():
 
     def __init__(self, y, x):
+        # self.__name = name
+        # self.__dungeon = dungeon
         self.__x = x
         self.__y = y
         self.__health = 100

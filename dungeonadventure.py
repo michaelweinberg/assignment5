@@ -8,7 +8,8 @@ from PIL import Image, ImageTk
 
 from tkinter.messagebox import showinfo
 import time
-from assignment5.assignment5.dungeon import Dungeon
+from dungeon import Dungeon
+from dungeon_controller import DungeonController
 
 
 
@@ -110,16 +111,18 @@ if __name__ == "__main__":
     canvas.pack()
 
     dungeon = Dungeon(cols, rows, canvas)
+    # our_hero = Adventurer(self.__map.start_point.get_y(), self.__map.start_point.get_x())
     dungeon.draw_maze()
+    dc = DungeonController(dungeon)
 
     def north():
-        dungeon.move_north()
+        dc.move_north()
     def south():
-        dungeon.move_south()
+        dc.move_south()
     def east():
-        dungeon.move_east()
+        dc.move_east()
     def west():
-        dungeon.move_west()
+        dc.move_west()
 
     # frame for legend
     frame_legend = tk.Frame(windows, highlightbackground="blue", highlightthickness=1, width=width / 4, height=175,
