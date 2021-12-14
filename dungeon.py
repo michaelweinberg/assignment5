@@ -22,6 +22,9 @@ class Dungeon(Observable):
     def get_movement_list(self):
         return self.__movement_list
 
+    def get_canvas(self):
+        return self.__canvas
+
     def draw_cell(self, row, col, color="#F2F2F2"):
         cell_width = 40
         x0, y0 = col * cell_width, row * cell_width
