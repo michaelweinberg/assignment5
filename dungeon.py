@@ -10,9 +10,17 @@ class Dungeon(Observable):
         self.__map = Map(cols, rows)
         self.__map.do_recursive_division()
         self.__map.set_room()
-        self.__hero = Adventurer(self.__map.start_point.get_y(), self.__map.start_point.get_x())
         self.__movement_list = [self.__map.start_point]
         self.__canvas = canvas
+
+    def get_map(self):
+        return self.__map
+
+    def get_hero(self):
+        return self.__hero
+
+    def get_movement_list(self):
+        return self.__movement_list
 
     def draw_cell(self, row, col, color="#F2F2F2"):
         cell_width = 40
