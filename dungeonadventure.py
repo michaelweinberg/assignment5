@@ -2,15 +2,9 @@ import tkinter as tk
 
 from assignment5.assignment5.adventurer import Adventurer
 from assignment5.assignment5.map import Map
-from dungeon import Dungeon
 from tkinter.messagebox import showinfo
 import time
-import copy
-import math
-def text(canvas, row, col):
-    x0, y0 = col * cell_width, row * cell_width
-    x1, y1 = x0 + cell_width, y0 + cell_width
-    canvas.create_text(x0, y0, x1, y1,fill="darkblue",font="Times 20 italic bold",text="0")
+
 """white"""
 def draw_cell(canvas, row, col, color="#F2F2F2"):
     x0, y0 = col * cell_width, row * cell_width
@@ -47,19 +41,36 @@ def draw_maze(canvas, map, moves):
 
 
 """green"""
-def draw_hero(canvas, map, moves):
-    move = moves[-1]
-    draw_maze(canvas, map, moves)
-    draw_cell(canvas, move.get_y(), move.get_x(), "#232323")
-    if check_reach():
-        exit()
-
+def draw_hero(canvas, map, moves, hero):
+    hero_move = moves[-1]
+    pre_move = moves[-2]
+    hero.hero_move(moves)
+    print(hero.get_health())
+    draw_cell(canvas, hero_move.get_y(), hero_move.get_x(), "#232323")
+    if pre_move == map.start_point:
+        draw_cell(canvas, pre_move.get_y(), pre_move.get_x(), "#eee83f")
+    elif pre_move == map.destination:
+        draw_cell(canvas, pre_move.get_y(), pre_move.get_x(), "#cf52eb")
+    elif pre_move != map.start_point and pre_move != map.destination:
+        if pre_move.get_value() == 4 or pre_move.get_value() == 5:
+            draw_cell(canvas, pre_move.get_y(), pre_move.get_x(), "#ee3f4d")
+        else:
+            draw_cell(canvas, pre_move.get_y(), pre_move.get_x(), "#F2F2F2")
+    check_reach()
 
 def check_reach():
     if movement_list[-1] == map.destination:
         if hero.get_pillars():
             print("Congratulations!")
-            return True
+            # x0, y0 = width / 2 - 200, 30
+            # x1, y1 = x0 + 400, y0 + 40
+            # canvas.create_rectangle(x0, y0, x1, y1, fill='#F2F2F2', outline='#525288', width=3)
+            # canvas.create_text(width / 2, y0 + 20,
+            #                    text="Congratulations! You reach the goal!",
+            #                    fill="#525288")
+            exit()
+        else:
+            print("not enough pillars")
 
 
 def generate_maze():
@@ -78,8 +89,7 @@ def move_west(event):
     if map.is_movable(room):
         hero.set_x(x-1)
         movement_list.append(room)
-        # draw_maze(canvas, map, movement_list)
-        draw_hero(canvas, map, movement_list)
+        draw_hero(canvas, map, movement_list, hero)
         print("west",  "y", y, "x", x, room.get_value())
     else:
         return
@@ -92,8 +102,7 @@ def move_east(event):
     if map.is_movable(room):
         hero.set_x(x+1)
         movement_list.append(room)
-        # draw_maze(canvas, map, movement_list)
-        draw_hero(canvas, map, movement_list)
+        draw_hero(canvas, map, movement_list, hero)
         print("east",  "y", y, "x", x, room.get_value())
     else:
         return
@@ -106,8 +115,7 @@ def move_south(event):
     if map.is_movable(room):
         hero.set_y(y+1)
         movement_list.append(room)
-        # draw_maze(canvas, map, movement_list)
-        draw_hero(canvas, map, movement_list)
+        draw_hero(canvas, map, movement_list, hero)
         print("south",  "y", y, "x", x, room.get_value())
     else:
         return
@@ -121,10 +129,12 @@ def move_north(event):
         hero.set_y(y-1)
         movement_list.append(room)
         print("north", "y", y, "x", x, room.get_value())
-        # draw_maze(canvas, map, movement_list)
-        draw_hero(canvas, map, movement_list)
+        draw_hero(canvas, map, movement_list, hero)
     else:
         return
+
+def vision_of_map():
+    map.show_map()
 
 if __name__ == "__main__":
     cell_width = 50
@@ -147,7 +157,6 @@ if __name__ == "__main__":
     hero = Adventurer(map.start_point.get_y(), map.start_point.get_x())
     movement_list = [map.start_point]
     print("start point(y,x)", map.start_point.get_y(),map.start_point.get_x())
-    # draw_maze(canvas, map, movement_list)
 
     windows.bind("w", move_north)
     windows.bind("s", move_south)

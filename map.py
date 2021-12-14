@@ -1,5 +1,6 @@
 import random
 
+from assignment5.assignment5.adventurer import Adventurer
 from assignment5.assignment5.map_entry_type import Map_entry_type
 from assignment5.assignment5.room import Room
 
@@ -19,8 +20,6 @@ class Map:
         self.__pillar_polymorphism = Room(None, None)
         self.__hero = None
 
-
-
     def set_width(self):
         pass
 
@@ -32,11 +31,6 @@ class Map:
 
     def get_height(self):
         return self.__height
-
-    def pillar_is_visited(self):
-        if self.__pillar_inheritance.is_visited() and self.__pillar_polymorphism.is_visited() and \
-                self.__pillar_abstraction.is_visited() and self.__pillar_encapsulation.is_visited():
-            return True
 
     def set_map(self, room, value):
         if value == Map_entry_type.map_empty:
@@ -103,7 +97,17 @@ class Map:
         for x in range(self.__width):
             for y in range(self.__height):
                 if self.is_movable(self.__map[y][x]):
-                    rooms.append(self.__map[y][x])
+                    rooms.add(self.__map[y][x])
+        # special_room = random.sample(rooms, 8)
+        # self.start_point = special_room[0]
+        # self.destination = special_room[1]
+        # self.__healing_potion = special_room[2]
+        # self.__pit = special_room[3]
+        # self.__pillar_abstraction = special_room[4]
+        # self.__pillar_encapsulation = special_room[5]
+        # self.__pillar_inheritance = special_room[6]
+        # self.__pillar_polymorphism = special_room[7]
+        #             rooms.append(self.__map[y][x])
         self.start_point = random.choice(rooms)
         self.destination = random.choice(rooms)
         self.__healing_potion = random.choice(rooms)
@@ -163,9 +167,6 @@ class Map:
         # self.set_map(self.__pillar_inheritance, Map_entry_type.map_pillar_inheritance)
         # self.set_map(self.__pillar_polymorphism, Map_entry_type.map_pillar_polymorphism)
 
-    # def get_room(self, x, y):
-    #     room = self.__map[y][x]
-    #     return room
     def get_room(self, y, x):
         room = self.__map[y][x]
         return room
@@ -233,6 +234,9 @@ def run():
     map.do_recursive_division()
     map.set_room()
     map.show_map()
+    hero = Adventurer(10, 10)
+    hero.get_health()
+    print(hero.get_health())
 
 if __name__ == "__main__":
     run()
