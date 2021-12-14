@@ -1,165 +1,209 @@
-import tkinter as tk
 
-from assignment5.assignment5.adventurer import Adventurer
-from assignment5.assignment5.map import Map
+import tkinter as tk
+from tkinter import BOTTOM, TOP
+from tkinter import LEFT
+from tkinter import *
+
+from PIL import Image, ImageTk
+
 from tkinter.messagebox import showinfo
 import time
-
-"""white"""
-def draw_cell(canvas, row, col, color="#F2F2F2"):
-    x0, y0 = col * cell_width, row * cell_width
-    x1, y1 = x0 + cell_width, y0 + cell_width
-    canvas.create_rectangle(x0, y0, x1, y1, fill=color, outline=color, width=0)
-
-def draw_maze(canvas, map, moves):
-    for y in range(rows):
-        for x in range(cols):
-            if map.get_room(y, x).get_value() == 0:
-                draw_cell(canvas, y, x)
-            elif map.get_room(y, x).get_value() == 1:
-                draw_cell(canvas, y, x, "#525288")
-                """blue"""
-            elif map.get_room(y, x).get_value() == 2:
-                draw_cell(canvas, y, x, "#eee83f")
-                """yellow"""
-            elif map.get_room(y, x).get_value() == 3:
-                draw_cell(canvas, y, x, "#cf52eb")
-                """purple"""
-            elif map.get_room(y, x).get_value() == 4:
-                draw_cell(canvas, y, x, "#ee3f4d")
-                """red"""
-            elif map.get_room(y, x).get_value() == 5:
-                draw_cell(canvas, y, x, "#ee3f4d")
-            elif map.get_room(y, x).get_value() == 6:
-                draw_cell(canvas, y, x, "#ee3f4d")
-            elif map.get_room(y, x).get_value() == 7:
-                draw_cell(canvas, y, x, "#ee3f4d")
-            elif map.get_room(y, x).get_value() == 8:
-                draw_cell(canvas, y, x, "#ee3f4d")
-            elif map.get_room(y, x).get_value() == 9:
-                draw_cell(canvas, y, x, "#ee3f4d")
+from assignment5.assignment5.dungeon import Dungeon
 
 
-"""green"""
-def draw_hero(canvas, map, moves, hero):
-    hero_move = moves[-1]
-    pre_move = moves[-2]
-    hero.hero_move(moves)
-    print(hero.get_health())
-    draw_cell(canvas, hero_move.get_y(), hero_move.get_x(), "#232323")
-    if pre_move == map.start_point:
-        draw_cell(canvas, pre_move.get_y(), pre_move.get_x(), "#eee83f")
-    elif pre_move == map.destination:
-        draw_cell(canvas, pre_move.get_y(), pre_move.get_x(), "#cf52eb")
-    elif pre_move != map.start_point and pre_move != map.destination:
-        if pre_move.get_value() == 4 or pre_move.get_value() == 5:
-            draw_cell(canvas, pre_move.get_y(), pre_move.get_x(), "#ee3f4d")
-        else:
-            draw_cell(canvas, pre_move.get_y(), pre_move.get_x(), "#F2F2F2")
-    check_reach()
 
-def check_reach():
-    if movement_list[-1] == map.destination:
-        if hero.get_pillars():
-            print("Congratulations!")
-            # x0, y0 = width / 2 - 200, 30
-            # x1, y1 = x0 + 400, y0 + 40
-            # canvas.create_rectangle(x0, y0, x1, y1, fill='#F2F2F2', outline='#525288', width=3)
-            # canvas.create_text(width / 2, y0 + 20,
-            #                    text="Congratulations! You reach the goal!",
-            #                    fill="#525288")
-            exit()
-        else:
-            print("not enough pillars")
+#method to initiate game
+def start_game():
+    def get_input(entry):
+        #entry1 = tk.Entry(start_canvas)
+        input = entry.get()
+        label2 = tk.Label(top_frame,
+                          text=f'Hello,{input}, Adventurer!\n  '
+                               f'Please use the control panel to navigate.\n  '
+                               f'Your mission is to collect all 4 pillars of OO\n'
+                          )
+        label2.grid(row=3,column=0)
+        #start_canvas.create_window(200, 230, window=label2)
+
+    top = tk.Toplevel(windows)
+    top.geometry("400x400")
+    top.title("You Have Started the Game! ")
+    top_frame = tk.Frame(top)
+    top_frame.pack()
+    # start_canvas = tk.Canvas(top_frame, background='cyan', width=400, height=400)
+    # start_canvas.grid()
+    adventurer_image = Image.open("adventurer.gif")
+    tk_image = ImageTk.PhotoImage(adventurer_image)
+    label1 = tk.Label(top_frame, image=tk_image)
+    label1.image = tk_image
+    label1.grid(row=0, column=0)
+    entry1 = tk.Entry(top_frame)
+    entry1.grid(row=1, column=0)
+
+    button1 = tk.Button(top_frame, text='Please enter your name, adventurer:  ', command=lambda: get_input(entry1))
+    button1.grid(row=2, column=0)
+
+# def start_game():
+#     top = tk.Toplevel(windows)
+#     top.geometry("400x400")
+#     top.title("You Have Started the Game! ")
+#     top_frame = tk.Frame(top)
+#     top_frame.grid()
+#     start_canvas = tk.Canvas(top_frame, background="cyan", width=400, height=400)
+#     start_canvas.pack()
+#
+#     entry1 = tk.Entry(start_canvas)
+#     start_canvas.create_window(200, 140, window=entry1)
+#
+#     adventurer_image = tk.PhotoImage(file="adventurer.gif")
+#     adventurer_image_canvas_object = start_canvas.create_image(125, 125, image=adventurer_image)
+#     adventurer_image_canvas_object.pack(side=CENTER)
+#     #number = random.randint(1, 100)
+#
+#
+#
+#     button1 = tk.Button(top_frame, text='Please enter your name, adventurer:  ', command=lambda: get_input(input))
+#     button1.pack()
+#     start_canvas.create_window(200, 180, window=button1)
 
 
-def generate_maze():
-    global movement_list
-    map.do_recursive_division()
-    map.set_room()
-    movement_list = [map.start_point]
-    draw_maze(canvas, map, movement_list)
+# def start_game():
+#     top = tk.Toplevel(windows)
+#     top.geometry("400x400")
+#     top.title("You Have Started the Game! ")
+#     top_frame = tk.Frame(top)
+#     top_frame.pack()
+#     entry1 = tk.Entry(top_frame)
+#     entry1.pack()
+#
+#     button1 = tk.Button(top_frame, text='Please enter your name, adventurer:  ', command=get_input)
+#     button1.pack()
+#     start_canvas = tk.Canvas(top_frame, background='cyan', width=400, height=400)
+#     start_canvas.pack()
+#     adventurer_image = tk.PhotoImage(file="adventurer.gif")
+#     adventurer_image_canvas_object = start_canvas.create_image(125, 125, image=adventurer_image)
+#     adventurer_image_canvas_object.pack(side=CENTER)
 
 
-def move_west(event):
-    x = hero.get_x()
-    y = hero.get_y()
-    print("hero(y,x)", y, x)
-    room = map.get_room(y, x-1)
-    if map.is_movable(room):
-        hero.set_x(x-1)
-        movement_list.append(room)
-        draw_hero(canvas, map, movement_list, hero)
-        print("west",  "y", y, "x", x, room.get_value())
-    else:
-        return
+"""method to help display room info"""
+# def display_roominfo():
+#     map.show_map()
 
-def move_east(event):
-    x = hero.get_x()
-    y = hero.get_y()
-    print("hero(y,x)", y, x)
-    room = map.get_room(y, x+1)
-    if map.is_movable(room):
-        hero.set_x(x+1)
-        movement_list.append(room)
-        draw_hero(canvas, map, movement_list, hero)
-        print("east",  "y", y, "x", x, room.get_value())
-    else:
-        return
-
-def move_south(event):
-    x = hero.get_x()
-    y = hero.get_y()
-    print("hero(y,x)", y, x)
-    room = map.get_room(y+1, x)
-    if map.is_movable(room):
-        hero.set_y(y+1)
-        movement_list.append(room)
-        draw_hero(canvas, map, movement_list, hero)
-        print("south",  "y", y, "x", x, room.get_value())
-    else:
-        return
-
-def move_north(event):
-    x = hero.get_x()
-    y = hero.get_y()
-    print("hero(y,x)", y, x)
-    room = map.get_room(y-1, x)
-    if map.is_movable(room):
-        hero.set_y(y-1)
-        movement_list.append(room)
-        print("north", "y", y, "x", x, room.get_value())
-        draw_hero(canvas, map, movement_list, hero)
-    else:
-        return
-
-def vision_of_map():
-    map.show_map()
 
 if __name__ == "__main__":
-    cell_width = 50
+    cell_width = 40
     rows = 15
     cols = 19
     height = cell_width * rows
     width = cell_width * cols
     move_counter, total_counter = 0, 0
+    global entry1
+    global top_frame
 
     windows = tk.Tk()
     windows.title("CovidAdventure")
     windows.resizable(0, 0)
     t0 = time.time()
 
+    # big maze canvas
     canvas = tk.Canvas(windows, background="#F2F2F2", width=width, height=height)
     canvas.pack()
 
-    map = Map(cols, rows)
-    generate_maze()
-    hero = Adventurer(map.start_point.get_y(), map.start_point.get_x())
-    movement_list = [map.start_point]
-    print("start point(y,x)", map.start_point.get_y(),map.start_point.get_x())
+    dungeon = Dungeon(cols, rows, canvas)
+    dungeon.draw_maze()
 
-    windows.bind("w", move_north)
-    windows.bind("s", move_south)
-    windows.bind("d", move_east)
-    windows.bind("a", move_west)
+    def north():
+        dungeon.move_north()
+    def south():
+        dungeon.move_south()
+    def east():
+        dungeon.move_east()
+    def west():
+        dungeon.move_west()
+
+    # frame for legend
+    frame_legend = tk.Frame(windows, highlightbackground="blue", highlightthickness=1, width=width / 4, height=175,
+                            bd=0)
+    frame_legend.pack(fill=tk.Y, side=tk.LEFT)
+
+    # start game button in legend frame
+    start_button = tk.Button(frame_legend, text="Start Game", fg="black", bg="yellow", command=start_game)
+    start_button.pack()
+
+    tk.Label(frame_legend,
+             text="LEGEND OF DUNGEON: ",
+             fg="black",
+             font="Times").pack()
+    tk.Label(frame_legend,
+             text="Yellow = 'Start'",
+             fg="yellow",
+             bg="black",
+             font="Times").pack()
+    tk.Label(frame_legend,
+             text="Purple = 'Exit'",
+             fg="purple",
+             font="Times").pack()
+    tk.Label(frame_legend,
+             text="Red = 'Pit'",
+             fg="red",
+             font="Times").pack()
+    tk.Label(frame_legend,
+             text="Black = Hero",
+             fg="black",
+             font="Times").pack()
+
+
+
+    # control panel frame
+    frame_controlpanel = tk.Frame(windows, highlightbackground="green", highlightthickness=1, width=width / 4,
+                                  height=175, bd=0)
+    frame_controlpanel.pack(fill=tk.Y, side=tk.LEFT)
+
+    north_button = tk.Button(frame_controlpanel, text="North", fg="cyan", command=north)
+    north_button.grid(row=2, column=3)
+
+    west_button = tk.Button(frame_controlpanel, text="West", fg="red", command=west)
+    west_button.grid(row=3, column=2)
+
+    center_button = tk.Button(frame_controlpanel, text="Control Panel", fg="green")
+    center_button.grid(row=3, column=3)
+
+    east_button = tk.Button(frame_controlpanel, text="East", fg="blue", command=east)
+    east_button.grid(row=3, column=4)
+
+    # bottom_frame = Frame(frame_controlpanel, width=width)
+    # bottom_frame.pack(side=BOTTOM)
+
+    south_button = tk.Button(frame_controlpanel, text="South", fg="black", command=south)
+    south_button.grid(row=4, column=3)
+
+    # room info frame
+    frame_roominfo = tk.Frame(windows, highlightbackground="green", highlightthickness=1, width=width / 4, height=175,
+                               bd=0)
+    frame_roominfo.pack()
+
+    tk.Label(frame_roominfo, anchor=tk.NW, height=40,
+             text="Room Info",
+             fg="blue",
+             font="Times").grid()
+
+    # roominfo_button = tk.Button(frame_roominfo, anchor=tk.N, height=40, text="Room Info", fg="green", font="Times",
+    #                              command=lambda: display_roominfo(hero.get_y(), hero.get_x()))
+    # roominfo_button.pack(side=TOP)
+
+    # hero stats, take potion, take vision potion frame
+    frame_herostats = tk.Frame(windows, highlightbackground="green", highlightthickness=1, width=width / 4, height=175,
+                                bd=0)
+    frame_herostats.pack(side=RIGHT)
+
+    tk.Label(frame_herostats, anchor=tk.NW, height=40,
+             text="Hero Stats",
+             fg="blue",
+             font="Times").grid()
+    tk.Label(frame_herostats, anchor=tk.S, height=40,
+             text="Take Potion/Vaccine",
+             fg="blue",
+             font="Times").grid()
+
     windows.mainloop()
+

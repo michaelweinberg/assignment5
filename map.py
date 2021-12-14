@@ -97,25 +97,25 @@ class Map:
         for x in range(self.__width):
             for y in range(self.__height):
                 if self.is_movable(self.__map[y][x]):
-                    rooms.add(self.__map[y][x])
-        # special_room = random.sample(rooms, 8)
-        # self.start_point = special_room[0]
-        # self.destination = special_room[1]
-        # self.__healing_potion = special_room[2]
-        # self.__pit = special_room[3]
-        # self.__pillar_abstraction = special_room[4]
-        # self.__pillar_encapsulation = special_room[5]
-        # self.__pillar_inheritance = special_room[6]
-        # self.__pillar_polymorphism = special_room[7]
-        #             rooms.append(self.__map[y][x])
-        self.start_point = random.choice(rooms)
-        self.destination = random.choice(rooms)
-        self.__healing_potion = random.choice(rooms)
-        self.__pit = random.choice(rooms)
-        self.__pillar_abstraction = random.choice(rooms)
-        self.__pillar_encapsulation = random.choice(rooms)
-        self.__pillar_inheritance = random.choice(rooms)
-        self.__pillar_polymorphism = random.choice(rooms)
+                    rooms.append(self.__map[y][x])
+        special_room = random.sample(rooms, 8)
+        self.start_point = special_room[0]
+        self.destination = special_room[1]
+        self.__healing_potion = special_room[2]
+        self.__pit = special_room[3]
+        self.__pillar_abstraction = special_room[4]
+        self.__pillar_encapsulation = special_room[5]
+        self.__pillar_inheritance = special_room[6]
+        self.__pillar_polymorphism = special_room[7]
+                    # rooms.append(self.__map[y][x])
+        # self.start_point = random.choice(rooms)
+        # self.destination = random.choice(rooms)
+        # self.__healing_potion = random.choice(rooms)
+        # self.__pit = random.choice(rooms)
+        # self.__pillar_abstraction = random.choice(rooms)
+        # self.__pillar_encapsulation = random.choice(rooms)
+        # self.__pillar_inheritance = random.choice(rooms)
+        # self.__pillar_polymorphism = random.choice(rooms)
         self.set_map(self.start_point, Map_entry_type.map_entrance)
         self.set_map(self.destination, Map_entry_type.map_exit)
         self.set_map(self.__healing_potion, Map_entry_type.map_healing_potion)
