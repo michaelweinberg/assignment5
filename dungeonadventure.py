@@ -76,88 +76,88 @@ def draw_maze(canvas, map, moves):
 
 """green"""
 
-
-def draw_hero(canvas, map, moves):
-    move = moves[-1]
-    draw_maze(canvas, map, moves)
-    draw_cell(canvas, move.get_y(), move.get_x(), "#232323")
-    if check_reach():
-        exit()
-
-
-def check_reach():
-    if movement_list[-1] == map.destination:
-        if hero.get_pillars():
-            print("Congratulations!")
-            return True
-
-
-def generate_maze():
-    global movement_list
-    map.do_recursive_division()
-    map.set_room()
-    movement_list = [map.start_point]
-    draw_maze(canvas, map, movement_list)
-
-
-def move_west():
-    x = hero.get_x()
-    y = hero.get_y()
-    print("hero(y,x)", y, x)
-    room = map.get_room(y, x - 1)
-    if map.is_movable(room):
-        hero.set_x(x - 1)
-        movement_list.append(room)
-        # draw_maze(canvas, map, movement_list)
-        draw_hero(canvas, map, movement_list)
-        print("west", "y", y, "x", x, room.get_value())
-    else:
-        return
-
-
-def move_east():
-    x = hero.get_x()
-    y = hero.get_y()
-    print("hero(y,x)", y, x)
-    room = map.get_room(y, x + 1)
-    if map.is_movable(room):
-        hero.set_x(x + 1)
-        movement_list.append(room)
-        # draw_maze(canvas, map, movement_list)
-        draw_hero(canvas, map, movement_list)
-        print("east", "y", y, "x", x, room.get_value())
-    else:
-        return
-
-
-def move_south():
-    x = hero.get_x()
-    y = hero.get_y()
-    print("hero(y,x)", y, x)
-    room = map.get_room(y + 1, x)
-    if map.is_movable(room):
-        hero.set_y(y + 1)
-        movement_list.append(room)
-        # draw_maze(canvas, map, movement_list)
-        draw_hero(canvas, map, movement_list)
-        print("south", "y", y, "x", x, room.get_value())
-    else:
-        return
-
-
-def move_north():
-    x = hero.get_x()
-    y = hero.get_y()
-    print("hero(y,x)", y, x)
-    room = map.get_room(y - 1, x)
-    if map.is_movable(room):
-        hero.set_y(y - 1)
-        movement_list.append(room)
-        print("north", "y", y, "x", x, room.get_value())
-        # draw_maze(canvas, map, movement_list)
-        draw_hero(canvas, map, movement_list)
-    else:
-        return
+#
+# def draw_hero(canvas, map, moves):
+#     move = moves[-1]
+#     draw_maze(canvas, map, moves)
+#     draw_cell(canvas, move.get_y(), move.get_x(), "#232323")
+#     if check_reach():
+#         exit()
+#
+#
+# def check_reach():
+#     if movement_list[-1] == map.destination:
+#         if hero.get_pillars():
+#             print("Congratulations!")
+#             return True
+#
+#
+# def generate_maze():
+#     global movement_list
+#     map.do_recursive_division()
+#     map.set_room()
+#     movement_list = [map.start_point]
+#     draw_maze(canvas, map, movement_list)
+#
+#
+# def move_west():
+#     x = hero.get_x()
+#     y = hero.get_y()
+#     print("hero(y,x)", y, x)
+#     room = map.get_room(y, x - 1)
+#     if map.is_movable(room):
+#         hero.set_x(x - 1)
+#         movement_list.append(room)
+#         # draw_maze(canvas, map, movement_list)
+#         draw_hero(canvas, map, movement_list)
+#         print("west", "y", y, "x", x, room.get_value())
+#     else:
+#         return
+#
+#
+# def move_east():
+#     x = hero.get_x()
+#     y = hero.get_y()
+#     print("hero(y,x)", y, x)
+#     room = map.get_room(y, x + 1)
+#     if map.is_movable(room):
+#         hero.set_x(x + 1)
+#         movement_list.append(room)
+#         # draw_maze(canvas, map, movement_list)
+#         draw_hero(canvas, map, movement_list)
+#         print("east", "y", y, "x", x, room.get_value())
+#     else:
+#         return
+#
+#
+# def move_south():
+#     x = hero.get_x()
+#     y = hero.get_y()
+#     print("hero(y,x)", y, x)
+#     room = map.get_room(y + 1, x)
+#     if map.is_movable(room):
+#         hero.set_y(y + 1)
+#         movement_list.append(room)
+#         # draw_maze(canvas, map, movement_list)
+#         draw_hero(canvas, map, movement_list)
+#         print("south", "y", y, "x", x, room.get_value())
+#     else:
+#         return
+#
+#
+# def move_north():
+#     x = hero.get_x()
+#     y = hero.get_y()
+#     print("hero(y,x)", y, x)
+#     room = map.get_room(y - 1, x)
+#     if map.is_movable(room):
+#         hero.set_y(y - 1)
+#         movement_list.append(room)
+#         print("north", "y", y, "x", x, room.get_value())
+#         # draw_maze(canvas, map, movement_list)
+#         draw_hero(canvas, map, movement_list)
+#     else:
+#         return
 
 
 #method to initiate game
@@ -267,7 +267,7 @@ if __name__ == "__main__":
 
 
     dungeon = Dungeon(cols, rows, canvas)
-    dungeon.draw_maze()
+    # dungeon.draw_maze()
     dc = DungeonController(dungeon, View())
 
     def north():
@@ -451,12 +451,12 @@ if __name__ == "__main__":
 
 
 
-    map = Map(cols, rows)
-    generate_maze()
-    hero = Adventurer(map.start_point.get_y(), map.start_point.get_x())
-    current_room = Room(hero.get_y, hero.get_x)
-    movement_list = [map.start_point]
-    print("start point(y,x)", map.start_point.get_y(), map.start_point.get_x())
+    # map = Map(cols, rows)
+    # generate_maze()
+    # hero = Adventurer(map.start_point.get_y(), map.start_point.get_x())
+    # current_room = Room(hero.get_y, hero.get_x)
+    # movement_list = [map.start_point]
+    # print("start point(y,x)", map.start_point.get_y(), map.start_point.get_x())
     # draw_maze(canvas, map, movement_list)
 
     # windows.bind("w", move_north)
