@@ -1,4 +1,3 @@
-
 import tkinter as tk
 from tkinter import BOTTOM, TOP
 from tkinter import LEFT
@@ -466,7 +465,3 @@ if __name__ == "__main__":
     # windows.bind("a", move_west)
 
     windows.mainloop()
-
-
-
-
