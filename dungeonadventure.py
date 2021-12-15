@@ -30,48 +30,48 @@ class View:
         print("Our hero is dead")
 
 
-def text(canvas, row, col):
-    x0, y0 = col * cell_width, row * cell_width
-    x1, y1 = x0 + cell_width, y0 + cell_width
-    canvas.create_text(x0, y0, x1, y1, fill="darkblue", font="Times 20 italic bold", text="0")
+# def text(canvas, row, col):
+#     x0, y0 = col * cell_width, row * cell_width
+#     x1, y1 = x0 + cell_width, y0 + cell_width
+#     canvas.create_text(x0, y0, x1, y1, fill="darkblue", font="Times 20 italic bold", text="0")
 
 
 """white"""
 
 
-def draw_cell(canvas, row, col, color="#F2F2F2"):
-    x0, y0 = col * cell_width, row * cell_width
-    x1, y1 = x0 + cell_width, y0 + cell_width
-    canvas.create_rectangle(x0, y0, x1, y1, fill=color, outline=color, width=0)
+# def draw_cell(canvas, row, col, color="#F2F2F2"):
+#     x0, y0 = col * cell_width, row * cell_width
+#     x1, y1 = x0 + cell_width, y0 + cell_width
+#     canvas.create_rectangle(x0, y0, x1, y1, fill=color, outline=color, width=0)
 
 
-def draw_maze(canvas, map, moves):
-    for y in range(rows):
-        for x in range(cols):
-            if map.get_room(y, x).get_value() == 0:
-                draw_cell(canvas, y, x)
-            elif map.get_room(y, x).get_value() == 1:
-                draw_cell(canvas, y, x, "#525288")
-                """blue"""
-            elif map.get_room(y, x).get_value() == 2:
-                draw_cell(canvas, y, x, "#eee83f")
-                """yellow"""
-            elif map.get_room(y, x).get_value() == 3:
-                draw_cell(canvas, y, x, "#cf52eb")
-                """purple"""
-            elif map.get_room(y, x).get_value() == 4:
-                draw_cell(canvas, y, x, "#ee3f4d")
-                """red"""
-            elif map.get_room(y, x).get_value() == 5:
-                draw_cell(canvas, y, x, "#ee3f4d")
-            elif map.get_room(y, x).get_value() == 6:
-                draw_cell(canvas, y, x, "#ee3f4d")
-            elif map.get_room(y, x).get_value() == 7:
-                draw_cell(canvas, y, x, "#ee3f4d")
-            elif map.get_room(y, x).get_value() == 8:
-                draw_cell(canvas, y, x, "#ee3f4d")
-            elif map.get_room(y, x).get_value() == 9:
-                draw_cell(canvas, y, x, "#ee3f4d")
+# def draw_maze(canvas, map, moves):
+#     for y in range(rows):
+#         for x in range(cols):
+#             if map.get_room(y, x).get_value() == 0:
+#                 draw_cell(canvas, y, x)
+#             elif map.get_room(y, x).get_value() == 1:
+#                 draw_cell(canvas, y, x, "#525288")
+#                 """blue"""
+#             elif map.get_room(y, x).get_value() == 2:
+#                 draw_cell(canvas, y, x, "#eee83f")
+#                 """yellow"""
+#             elif map.get_room(y, x).get_value() == 3:
+#                 draw_cell(canvas, y, x, "#cf52eb")
+#                 """purple"""
+#             elif map.get_room(y, x).get_value() == 4:
+#                 draw_cell(canvas, y, x, "#ee3f4d")
+#                 """red"""
+#             elif map.get_room(y, x).get_value() == 5:
+#                 draw_cell(canvas, y, x, "#ee3f4d")
+#             elif map.get_room(y, x).get_value() == 6:
+#                 draw_cell(canvas, y, x, "#ee3f4d")
+#             elif map.get_room(y, x).get_value() == 7:
+#                 draw_cell(canvas, y, x, "#ee3f4d")
+#             elif map.get_room(y, x).get_value() == 8:
+#                 draw_cell(canvas, y, x, "#ee3f4d")
+#             elif map.get_room(y, x).get_value() == 9:
+#                 draw_cell(canvas, y, x, "#ee3f4d")
 
 
 """green"""

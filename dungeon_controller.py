@@ -136,6 +136,18 @@ class DungeonController:
         messagebox.showinfo("Room Info", f"{self.__dungeon.get_hero().get_name()} Your Room Has:\n"
                                       f"{room_description}")
 
+        if current_room.get_value() >= 4:
+            messagebox.showinfo("There is something in this room!", f"You use/pick up this item.\n"
+                                                                    f"If it is a pit, you fall in and lose 50 health points.")
+
+        if current_room.get_value() == 5:
+            hero.min_health()
+            if hero.get_health() <= 0:
+                messagebox.showinfo("Game Over!", f"Your health points have fallen below 0.\n"
+                                                  f"You have died.  Please exit out of the game!")
+
+
+
     def hero_stats(self):
         messagebox.showinfo("Hero Stats", f"{self.__dungeon.get_hero().get_name()} Your Hero Stats are:\nHealth Points: {self.__dungeon.get_hero().get_health()}\n"
                                           f"Number of Vaccines:  {self.__dungeon.get_hero().get_number_vaccine()}\n"
