@@ -113,6 +113,7 @@ class DungeonController:
 
     # method to get room info
     def room_info(self):
+        #currently not showing there's a potion there after you enter the room - hero already scooped it and then the display is showing no potion
         current_room = self.__dungeon.get_map().get_room(self.__dungeon.get_hero().get_y(), self.__dungeon.get_hero().get_x())
         if current_room.get_value() == 0:
             room_description = "Nothing"
@@ -141,25 +142,65 @@ class DungeonController:
                                                                     f"If it is a pit, you fall in and lose 50 health points.")
 
         if current_room.get_value() == 5:
-            hero.min_health()
-            if hero.get_health() <= 0:
+            self.__dungeon.get_hero().min_health()
+            if self.__dungeon.get_hero().get_health() <= 0:
                 messagebox.showinfo("Game Over!", f"Your health points have fallen below 0.\n"
                                                   f"You have died.  Please exit out of the game!")
 
 
 
-    def hero_stats(self):
-        messagebox.showinfo("Hero Stats", f"{self.__dungeon.get_hero().get_name()} Your Hero Stats are:\nHealth Points: {self.__dungeon.get_hero().get_health()}\n"
-                                          f"Number of Vaccines:  {self.__dungeon.get_hero().get_number_vaccine()}\n"
-                                          f"Number of Vision Potions:  {self.__dungeon.get_hero().get_number_vision_potion()}\n"
-                                          f"Pillars of OO Collected:  {self.__dungeon.get_hero().get_number_pillars()}")
+    # def hero_stats(self):
+    #     messagebox.showinfo("Hero Stats", f"{self.__dungeon.get_hero().get_name()} Your Hero Stats are:\nHealth Points: {self.__dungeon.get_hero().get_health()}\n"
+    #                                       f"Number of Vaccines:  {self.__dungeon.get_hero().get_number_vaccine()}\n"
+    #                                       f"Number of Vision Potions:  {self.__dungeon.get_hero().get_number_vision_potion()}\n"
+    #                                       f"Pillars of OO Collected:  {self.__dungeon.get_hero().get_number_pillars()}")
+    #
+    # def yes_callback(self):
+    #
+    #     self.__dungeon.get_hero().add_health()
+    #     messagebox.showinfo("Taking Vaccine",
+    #                         f"{self.__dungeon.get_hero().get_name()} Your Health Points are: {self.__dungeon.get_hero().get_health()} ")
+    #
+    # def no_callback(self):
+    #
+    #     messagebox.showinfo("Not taking vaccine", "Show User Health Points (unaltered)")
 
-    def yes_callback(self):
-
-        self.__dungeon.get_hero().add_health()
-        messagebox.showinfo("Taking Vaccine",
-                            f"{self.__dungeon.get_hero().get_name()} Your Health Points are: {self.__dungeon.get_hero().get_health()} ")
-
-    def no_callback():
-        messagebox.showinfo("Not taking vaccine", "Show User Health Points (unaltered)")
+    # def vaccine_buttons(self):
+    #
+    #     top2 = tk.Toplevel(windows)
+    #     top2.geometry("500x500")
+    #     top2.title("Would you like to take the vaccine? ")
+    #     top2_frame = tk.Frame(top2)
+    #     top2_frame.pack()
+    #     canvas2 = tk.Canvas(top2, width=400, height=400)
+    #     canvas2.pack()
+    #
+    #     tk.Label(canvas2, text='Would you like to take the vaccine ? ').pack()
+    #
+    #     vaccine_image = Image.open("vaccine.gif")
+    #     tk_image2 = ImageTk.PhotoImage(vaccine_image)
+    #     label2 = tk.Label(top2_frame, image=tk_image2)
+    #     label2.image = tk_image2
+    #     label2.grid(row=0, column=0)
+    #
+    #     number = random.randint(1, 100)
+    #
+    #     bottom2_frame = Frame(top2)
+    #     bottom2_frame.pack(side=BOTTOM)
+    #
+    #     green_button = Button(bottom2_frame, text="Yes", fg="green", command=dc.yes_callback())
+    #     green_button.pack(side=LEFT)
+    #
+    #     red_button = Button(bottom2_frame, text="No", fg="red", command=dc.no_callback())
+    #     red_button.pack(side=RIGHT)
+    #
+    # def get_input(self, entry):
+    #     self.__dungeon.get_hero().set_name(entry.get())
+    #     label2 = tk.Label(top_frame,
+    #                       text=f'Hello,{adventurer_name}, Adventurer!\n  '
+    #                            f'Please use the control panel to navigate.\n  '
+    #                            f'Your mission is to collect all 4 pillars of OO and stay alive!\n'
+    #                       )
+    #     label2.grid(row=3, column=0)
+    #     #start_canvas.create_window(200, 230, window=label2)
 
