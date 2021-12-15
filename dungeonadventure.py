@@ -11,7 +11,15 @@ import time
 from dungeon import Dungeon
 from dungeon_controller import DungeonController
 
+class View:
 
+    @staticmethod
+    def show_health(health):
+        print("Health in view:", health)
+
+    @staticmethod
+    def show_dead():
+        print("Our hero is dead")
 
 #method to initiate game
 def start_game():
@@ -111,9 +119,11 @@ if __name__ == "__main__":
     canvas.pack()
 
     dungeon = Dungeon(cols, rows, canvas)
+
     # our_hero = Adventurer(self.__map.start_point.get_y(), self.__map.start_point.get_x())
-    dungeon.draw_maze()
-    dc = DungeonController(dungeon)
+    # dungeon.draw_maze()
+    dc = DungeonController(dungeon, View())
+    # dc = DungeonController(dungeon)
 
     def north():
         dc.move_north()
@@ -123,6 +133,9 @@ if __name__ == "__main__":
         dc.move_east()
     def west():
         dc.move_west()
+
+    def use_potion():
+        dc.use_potion
 
     # frame for legend
     frame_legend = tk.Frame(windows, highlightbackground="blue", highlightthickness=1, width=width / 4, height=175,
@@ -162,22 +175,22 @@ if __name__ == "__main__":
                                   height=175, bd=0)
     frame_controlpanel.pack(fill=tk.Y, side=tk.LEFT)
 
-    north_button = tk.Button(frame_controlpanel, text="North", fg="cyan", command=north)
+    north_button = tk.Button(frame_controlpanel, text="North", fg="cyan", command=dc.move_north)
     north_button.grid(row=2, column=3)
 
-    west_button = tk.Button(frame_controlpanel, text="West", fg="red", command=west)
+    west_button = tk.Button(frame_controlpanel, text="West", fg="red", command=dc.move_west)
     west_button.grid(row=3, column=2)
 
     center_button = tk.Button(frame_controlpanel, text="Control Panel", fg="green")
     center_button.grid(row=3, column=3)
 
-    east_button = tk.Button(frame_controlpanel, text="East", fg="blue", command=east)
+    east_button = tk.Button(frame_controlpanel, text="East", fg="blue", command=dc.move_east)
     east_button.grid(row=3, column=4)
 
     # bottom_frame = Frame(frame_controlpanel, width=width)
     # bottom_frame.pack(side=BOTTOM)
 
-    south_button = tk.Button(frame_controlpanel, text="South", fg="black", command=south)
+    south_button = tk.Button(frame_controlpanel, text="South", fg="black", command=dc.move_south)
     south_button.grid(row=4, column=3)
 
     # room info frame

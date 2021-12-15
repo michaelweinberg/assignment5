@@ -12,6 +12,8 @@ class Dungeon(Observable):
         self.__map.set_room()
         self.__movement_list = [self.__map.start_point]
         self.__canvas = canvas
+        self.__hero = Adventurer(self.__map.start_point.get_y(), self.__map.start_point.get_x())
+        self.draw_maze()
 
     def get_map(self):
         return self.__map
@@ -49,7 +51,7 @@ class Dungeon(Observable):
                     self.draw_cell(y, x, "#ee3f4d")
                     """red"""
                 elif self.__map.get_room(y, x).get_value() == 5:
-                    self.draw_cell(y, x, "#ee3f4d")
+                    self.draw_cell(y, x, "#808080")
                 elif self.__map.get_room(y, x).get_value() == 6:
                     self.draw_cell(y, x, "#ee3f4d")
                 elif self.__map.get_room(y, x).get_value() == 7:

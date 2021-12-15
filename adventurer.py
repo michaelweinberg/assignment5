@@ -30,13 +30,14 @@ class Adventurer():
 
     def add_health(self):
         self.__health += 10
-        print(self.__health)
+        print("Health plus", self.__health)
 
     def min_health(self):
         self.__health -= 50
         print(self.__health)
-        if self.__health < 0:
-            print("die")
+        print("Health minus", self.__health)
+        if self.__health <= 0:
+            print("Our hero is dead")
     # def set_vaccine_points(self, vaccine_points):
     #     self.__number_vaccine += vaccine_points
     #
@@ -59,21 +60,21 @@ class Adventurer():
         self.__dungeon_adventure.remove_observer()
         print("Our hero has died")
 
-    def hero_move(self, moves):
-        hero_move = moves[-1]
-        if hero_move.get_value() == 6:
-            self.add_pillar("abstraction")
-            hero_move.set_value(0)
-        if hero_move.get_value() == 7:
-            self.add_pillar("encapsulation")
-            hero_move.set_value(0)
-        if hero_move.get_value() == 8:
-            self.add_pillar("inheritance")
-            hero_move.set_value(0)
-        if hero_move.get_value() == 9:
-            self.add_pillar("polymorphism")
-            hero_move.set_value(0)
-        if hero_move.get_value() == 4:
-            self.add_health()
-        if hero_move.get_value() == 5:
-            self.min_health()
+    # def hero_move(self, moves):
+    #     hero_move = moves[-1]
+    #     if hero_move.get_value() == 6:
+    #         self.add_pillar("abstraction")
+    #         hero_move.set_value(0)
+    #     if hero_move.get_value() == 7:
+    #         self.add_pillar("encapsulation")
+    #         hero_move.set_value(0)
+    #     if hero_move.get_value() == 8:
+    #         self.add_pillar("inheritance")
+    #         hero_move.set_value(0)
+    #     if hero_move.get_value() == 9:
+    #         self.add_pillar("polymorphism")
+    #         hero_move.set_value(0)
+    #     if hero_move.get_value() == 4:
+    #         self.add_health()
+    #     if hero_move.get_value() == 5:
+    #         self.min_health()
