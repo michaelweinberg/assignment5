@@ -30,136 +30,6 @@ class View:
         print("Our hero is dead")
 
 
-# def text(canvas, row, col):
-#     x0, y0 = col * cell_width, row * cell_width
-#     x1, y1 = x0 + cell_width, y0 + cell_width
-#     canvas.create_text(x0, y0, x1, y1, fill="darkblue", font="Times 20 italic bold", text="0")
-
-
-"""white"""
-
-
-# def draw_cell(canvas, row, col, color="#F2F2F2"):
-#     x0, y0 = col * cell_width, row * cell_width
-#     x1, y1 = x0 + cell_width, y0 + cell_width
-#     canvas.create_rectangle(x0, y0, x1, y1, fill=color, outline=color, width=0)
-
-
-# def draw_maze(canvas, map, moves):
-#     for y in range(rows):
-#         for x in range(cols):
-#             if map.get_room(y, x).get_value() == 0:
-#                 draw_cell(canvas, y, x)
-#             elif map.get_room(y, x).get_value() == 1:
-#                 draw_cell(canvas, y, x, "#525288")
-#                 """blue"""
-#             elif map.get_room(y, x).get_value() == 2:
-#                 draw_cell(canvas, y, x, "#eee83f")
-#                 """yellow"""
-#             elif map.get_room(y, x).get_value() == 3:
-#                 draw_cell(canvas, y, x, "#cf52eb")
-#                 """purple"""
-#             elif map.get_room(y, x).get_value() == 4:
-#                 draw_cell(canvas, y, x, "#ee3f4d")
-#                 """red"""
-#             elif map.get_room(y, x).get_value() == 5:
-#                 draw_cell(canvas, y, x, "#ee3f4d")
-#             elif map.get_room(y, x).get_value() == 6:
-#                 draw_cell(canvas, y, x, "#ee3f4d")
-#             elif map.get_room(y, x).get_value() == 7:
-#                 draw_cell(canvas, y, x, "#ee3f4d")
-#             elif map.get_room(y, x).get_value() == 8:
-#                 draw_cell(canvas, y, x, "#ee3f4d")
-#             elif map.get_room(y, x).get_value() == 9:
-#                 draw_cell(canvas, y, x, "#ee3f4d")
-
-
-"""green"""
-
-#
-# def draw_hero(canvas, map, moves):
-#     move = moves[-1]
-#     draw_maze(canvas, map, moves)
-#     draw_cell(canvas, move.get_y(), move.get_x(), "#232323")
-#     if check_reach():
-#         exit()
-#
-#
-# def check_reach():
-#     if movement_list[-1] == map.destination:
-#         if hero.get_pillars():
-#             print("Congratulations!")
-#             return True
-#
-#
-# def generate_maze():
-#     global movement_list
-#     map.do_recursive_division()
-#     map.set_room()
-#     movement_list = [map.start_point]
-#     draw_maze(canvas, map, movement_list)
-#
-#
-# def move_west():
-#     x = hero.get_x()
-#     y = hero.get_y()
-#     print("hero(y,x)", y, x)
-#     room = map.get_room(y, x - 1)
-#     if map.is_movable(room):
-#         hero.set_x(x - 1)
-#         movement_list.append(room)
-#         # draw_maze(canvas, map, movement_list)
-#         draw_hero(canvas, map, movement_list)
-#         print("west", "y", y, "x", x, room.get_value())
-#     else:
-#         return
-#
-#
-# def move_east():
-#     x = hero.get_x()
-#     y = hero.get_y()
-#     print("hero(y,x)", y, x)
-#     room = map.get_room(y, x + 1)
-#     if map.is_movable(room):
-#         hero.set_x(x + 1)
-#         movement_list.append(room)
-#         # draw_maze(canvas, map, movement_list)
-#         draw_hero(canvas, map, movement_list)
-#         print("east", "y", y, "x", x, room.get_value())
-#     else:
-#         return
-#
-#
-# def move_south():
-#     x = hero.get_x()
-#     y = hero.get_y()
-#     print("hero(y,x)", y, x)
-#     room = map.get_room(y + 1, x)
-#     if map.is_movable(room):
-#         hero.set_y(y + 1)
-#         movement_list.append(room)
-#         # draw_maze(canvas, map, movement_list)
-#         draw_hero(canvas, map, movement_list)
-#         print("south", "y", y, "x", x, room.get_value())
-#     else:
-#         return
-#
-#
-# def move_north():
-#     x = hero.get_x()
-#     y = hero.get_y()
-#     print("hero(y,x)", y, x)
-#     room = map.get_room(y - 1, x)
-#     if map.is_movable(room):
-#         hero.set_y(y - 1)
-#         movement_list.append(room)
-#         print("north", "y", y, "x", x, room.get_value())
-#         # draw_maze(canvas, map, movement_list)
-#         draw_hero(canvas, map, movement_list)
-#     else:
-#         return
-
-
 #method to initiate game
 def start_game():
     def get_input(entry):
@@ -190,59 +60,6 @@ def start_game():
 
     button1 = tk.Button(top_frame, text='Please enter your name, adventurer:  ', command=lambda: get_input(entry1))
     button1.grid(row=2, column=0)
-
-# def start_game():
-#     top = tk.Toplevel(windows)
-#     top.geometry("400x400")
-#     top.title("You Have Started the Game! ")
-#     top_frame = tk.Frame(top)
-#     top_frame.grid()
-#     start_canvas = tk.Canvas(top_frame, background="cyan", width=400, height=400)
-#     start_canvas.pack()
-#
-#     entry1 = tk.Entry(start_canvas)
-#     start_canvas.create_window(200, 140, window=entry1)
-#
-#     adventurer_image = tk.PhotoImage(file="adventurer.gif")
-#     adventurer_image_canvas_object = start_canvas.create_image(125, 125, image=adventurer_image)
-#     adventurer_image_canvas_object.pack(side=CENTER)
-#     #number = random.randint(1, 100)
-#
-#
-#
-#     button1 = tk.Button(top_frame, text='Please enter your name, adventurer:  ', command=lambda: get_input(input))
-#     button1.pack()
-#     start_canvas.create_window(200, 180, window=button1)
-
-
-# def start_game():
-#     top = tk.Toplevel(windows)
-#     top.geometry("400x400")
-#     top.title("You Have Started the Game! ")
-#     top_frame = tk.Frame(top)
-#     top_frame.pack()
-#     entry1 = tk.Entry(top_frame)
-#     entry1.pack()
-#
-#     button1 = tk.Button(top_frame, text='Please enter your name, adventurer:  ', command=get_input)
-#     button1.pack()
-#     start_canvas = tk.Canvas(top_frame, background='cyan', width=400, height=400)
-#     start_canvas.pack()
-#     adventurer_image = tk.PhotoImage(file="adventurer.gif")
-#     adventurer_image_canvas_object = start_canvas.create_image(125, 125, image=adventurer_image)
-#     adventurer_image_canvas_object.pack(side=CENTER)
-
-
-
-
-
-
-
-#method to help display room info
-# def display_roominfo(y,x):
-#     room = map.get_room(y,x)
-#     print(room.__str__())
-
 
 if __name__ == "__main__":
     cell_width = 40
@@ -341,32 +158,6 @@ if __name__ == "__main__":
                                bd=0)
     frame_right.pack()
 
-    # method to get room info
-    # def room_info():
-    #     global adventurer_name
-    #     current_room = Room(hero.get_y, hero.get_x)
-    #     if current_room.get_value() == 0:
-    #         room_description = "Nothing"
-    #     elif current_room.get_value() == 2:
-    #         room_description = "Entrance/Start"
-    #     elif current_room.get_value() == 3:
-    #         room_description = "Exit"
-    #     elif current_room.get_value() == 4:
-    #         room_description = "Vaccine"
-    #     elif current_room.get_value() == 5:
-    #         room_description = "Pit of People"
-    #     elif current_room.get_value() == 6:
-    #         room_description = "Pillar:  Abstraction"
-    #     elif current_room.get_value() == 7:
-    #         room_description = "Pillar:  Encapsulation"
-    #     elif current_room.get_value() == 8:
-    #         room_description = "Pillar:  Inheritance"
-    #     elif current_room.get_value() == 9:
-    #         room_description = "Pillar:  Polymorphism"
-
-
-        # messagebox.showinfo("Room Info", f"{dungeon.get_hero().get_name()} Your Room Has:\n"
-        #                                   f"{dc.room_info()}")
 
     # room info, hero stats, take potion, take vision potion buttons in right bottom frame
     tk.Button(frame_right,
@@ -374,40 +165,23 @@ if __name__ == "__main__":
              fg="blue",
              font="Times", command=dc.room_info).grid(row=0, column=0)
 
-    # roominfo_button = tk.Button(frame_roominfo, anchor=tk.N, height=40, text="Room Info", fg="green", font="Times",
-    #                              command=lambda: display_roominfo(hero.get_y(), hero.get_x()))
-    # roominfo_button.pack(side=TOP)
-
-    # hero stats function when hero stats button is pressed
-    # def hero_stats():
-    #     global adventurer_name
-    #     messagebox.showinfo("Hero Stats", f"{dungeon.get_hero().get_name()} Your Hero Stats are:\nHealth Points: {hero.get_health()}\n"
-    #                                       f"Number of Vaccines:  {dungeon.get_hero().get_number_vaccine()}\n"
-    #                                       f"Number of Vision Potions:  {dungeon.get_hero().get_number_vision_potion()}\n"
-    #                                       f"Pillars of OO Collected:  {dungeon.get_hero().get_number_pillars()}")
-
-
+    def hero_stats():
+        global adventurer_name
+        messagebox.showinfo("Hero Stats",
+                            f"{adventurer_name} Your Hero Stats are:\nHealth Points: {hero.get_health()}\n"
+                            f"Number of Vaccines:  {hero.get_number_vaccine()}\n"
+                            f"Number of Vision Potions:  {hero.get_number_vision_potion()}\n"
+                            f"Pillars of OO Collected:  {hero.get_number_pillars()}")
 
     tk.Button(frame_right,
              text="Hero Stats",
              fg="blue",
              font="Times",
-             command=dc.hero_stats()).grid(row=0, column=1)
+             command=hero_stats).grid(row=0, column=1)
 
 
     def vaccine_buttons():
 
-        # def yes_callback():
-        #
-        #     hero.add_health()
-        #     global adventurer_name
-        #     messagebox.showinfo("Taking Vaccine", f"{dungeon.get_hero().get_name()} Your Health Points are: {dungeon.get_hero().get_health()} ")
-        #
-        # def no_callback():
-        #     messagebox.showinfo("Not taking vaccine", "Show User Health Points (unaltered)")
-
-
-        # hooking up take potion action to tkinter code
         top2 = tk.Toplevel(windows)
         top2.geometry("500x500")
         top2.title("Would you like to take the vaccine? ")
@@ -417,7 +191,6 @@ if __name__ == "__main__":
         canvas2.pack()
 
         tk.Label(canvas2, text='Would you like to take the vaccine ? ').pack()
-        # canvas2.create_window(200, 180, window=label2)
 
         vaccine_image = Image.open("vaccine.gif")
         tk_image2 = ImageTk.PhotoImage(vaccine_image)
@@ -430,10 +203,10 @@ if __name__ == "__main__":
         bottom2_frame = Frame(top2)
         bottom2_frame.pack(side=BOTTOM)
 
-        green_button = Button(bottom2_frame, text="Yes", fg="green", command=dc.yes_callback())
+        green_button = Button(bottom2_frame, text="Yes", fg="green", command=yes_callback)
         green_button.pack(side=LEFT)
 
-        red_button = Button(bottom2_frame, text="No", fg="red", command=dc.no_callback())
+        red_button = Button(bottom2_frame, text="No", fg="red", command=no_callback)
         red_button.pack(side=RIGHT)
 
     tk.Button(frame_right,
@@ -446,22 +219,5 @@ if __name__ == "__main__":
               text="Use Vision Potion",
               fg="blue",
               font="Times").grid(row=1, column=1)
-
-
-
-
-
-    # map = Map(cols, rows)
-    # generate_maze()
-    # hero = Adventurer(map.start_point.get_y(), map.start_point.get_x())
-    # current_room = Room(hero.get_y, hero.get_x)
-    # movement_list = [map.start_point]
-    # print("start point(y,x)", map.start_point.get_y(), map.start_point.get_x())
-    # draw_maze(canvas, map, movement_list)
-
-    # windows.bind("w", move_north)
-    # windows.bind("s", move_south)
-    # windows.bind("d", move_east)
-    # windows.bind("a", move_west)
 
     windows.mainloop()
