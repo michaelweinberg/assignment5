@@ -1,4 +1,3 @@
-
 import tkinter as tk
 from tkinter import BOTTOM, TOP
 from tkinter import LEFT
@@ -18,6 +17,17 @@ from tkinter.messagebox import showinfo
 import time
 import copy
 import math
+from dungeon_controller import DungeonController
+
+class View:
+
+    @staticmethod
+    def show_health(health):
+        print("Health in view:", health)
+
+    @staticmethod
+    def show_dead():
+        print("Our hero is dead")
 
 
 def text(canvas, row, col):
@@ -258,6 +268,7 @@ if __name__ == "__main__":
 
     dungeon = Dungeon(cols, rows, canvas)
     dungeon.draw_maze()
+    dc = DungeonController(dungeon, View())
 
     def north():
         dungeon.move_north()
@@ -308,21 +319,21 @@ if __name__ == "__main__":
     frame_controlpanel.pack(fill=tk.Y, side=tk.LEFT)
 
 
-    north_button = tk.Button(frame_controlpanel, text="North", fg="cyan", command=move_north)
+    north_button = tk.Button(frame_controlpanel, text="North", fg="cyan", command=dc.move_north)
     north_button.grid(row=2, column=3)
 
-    west_button = tk.Button(frame_controlpanel, text="West", fg="red", command=move_west)
+    west_button = tk.Button(frame_controlpanel, text="West", fg="red", command=dc.move_west)
     west_button.grid(row=3, column=2)
 
     center_button = tk.Button(frame_controlpanel, text="Control Panel", fg="green")
     center_button.grid(row=3, column=3)
 
 
-    east_button = tk.Button(frame_controlpanel, text="East", fg="blue", command=move_east)
+    east_button = tk.Button(frame_controlpanel, text="East", fg="blue", command=dc.move_east)
     east_button.grid(row=3, column=4)
 
 
-    south_button = tk.Button(frame_controlpanel, text="South", fg="black", command=move_south)
+    south_button = tk.Button(frame_controlpanel, text="South", fg="black", command=dc.move_south)
     south_button.grid(row=4, column=3)
 
     # right bottom frame
@@ -354,8 +365,8 @@ if __name__ == "__main__":
     #         room_description = "Pillar:  Polymorphism"
 
 
-        messagebox.showinfo("Room Info", f"{dungeon.get_hero().get_name()} Your Room Has:\n"
-                                          f"{dc.room_info()}")
+        # messagebox.showinfo("Room Info", f"{dungeon.get_hero().get_name()} Your Room Has:\n"
+        #                                   f"{dc.room_info()}")
 
     # room info, hero stats, take potion, take vision potion buttons in right bottom frame
     tk.Button(frame_right,
@@ -368,12 +379,12 @@ if __name__ == "__main__":
     # roominfo_button.pack(side=TOP)
 
     # hero stats function when hero stats button is pressed
-    def hero_stats():
-        global adventurer_name
-        messagebox.showinfo("Hero Stats", f"{adventurer_name} Your Hero Stats are:\nHealth Points: {hero.get_health()}\n"
-                                          f"Number of Vaccines:  {hero.get_number_vaccine()}\n"
-                                          f"Number of Vision Potions:  {hero.get_number_vision_potion()}\n"
-                                          f"Pillars of OO Collected:  {hero.get_number_pillars()}")
+    # def hero_stats():
+    #     global adventurer_name
+    #     messagebox.showinfo("Hero Stats", f"{dungeon.get_hero().get_name()} Your Hero Stats are:\nHealth Points: {hero.get_health()}\n"
+    #                                       f"Number of Vaccines:  {dungeon.get_hero().get_number_vaccine()}\n"
+    #                                       f"Number of Vision Potions:  {dungeon.get_hero().get_number_vision_potion()}\n"
+    #                                       f"Pillars of OO Collected:  {dungeon.get_hero().get_number_pillars()}")
 
 
 
@@ -381,19 +392,19 @@ if __name__ == "__main__":
              text="Hero Stats",
              fg="blue",
              font="Times",
-             command=hero_stats).grid(row=0, column=1)
+             command=dc.hero_stats()).grid(row=0, column=1)
 
 
     def vaccine_buttons():
 
-        def yes_callback():
-
-            hero.add_health()
-            global adventurer_name
-            messagebox.showinfo("Taking Vaccine", f"{adventurer_name} Your Health Points are: {hero.get_health()} ")
-
-        def no_callback():
-            messagebox.showinfo("Not taking vaccine", "Show User Health Points (unaltered)")
+        # def yes_callback():
+        #
+        #     hero.add_health()
+        #     global adventurer_name
+        #     messagebox.showinfo("Taking Vaccine", f"{dungeon.get_hero().get_name()} Your Health Points are: {dungeon.get_hero().get_health()} ")
+        #
+        # def no_callback():
+        #     messagebox.showinfo("Not taking vaccine", "Show User Health Points (unaltered)")
 
 
         # hooking up take potion action to tkinter code
@@ -419,10 +430,10 @@ if __name__ == "__main__":
         bottom2_frame = Frame(top2)
         bottom2_frame.pack(side=BOTTOM)
 
-        green_button = Button(bottom2_frame, text="Yes", fg="green", command=yes_callback)
+        green_button = Button(bottom2_frame, text="Yes", fg="green", command=dc.yes_callback())
         green_button.pack(side=LEFT)
 
-        red_button = Button(bottom2_frame, text="No", fg="red", command=no_callback)
+        red_button = Button(bottom2_frame, text="No", fg="red", command=dc.no_callback())
         red_button.pack(side=RIGHT)
 
     tk.Button(frame_right,
@@ -454,4 +465,3 @@ if __name__ == "__main__":
     # windows.bind("a", move_west)
 
     windows.mainloop()
-

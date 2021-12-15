@@ -1,8 +1,8 @@
 import random
 
-from assignment5.assignment5.adventurer import Adventurer
-from assignment5.assignment5.map_entry_type import Map_entry_type
-from assignment5.assignment5.room import Room
+from adventurer import Adventurer
+from map_entry_type import Map_entry_type
+from room import Room
 
 
 class Map:
