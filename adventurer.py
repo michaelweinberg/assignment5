@@ -3,15 +3,21 @@ from observer import Observer
 class Adventurer():
 
     def __init__(self, y, x):
-        # self.__name = name
+        self.__name = ""
         # self.__dungeon = dungeon
         self.__x = x
         self.__y = y
         self.__health = 100
         self.__is_dead = False
         self.__number_vaccine = 0
-        # self.__number_vision_potion = 0
+        self.__number_vision_potion = 0
         self.__pillars = []
+
+    def get_name(self):
+        return self.__name
+
+    def set_name(self, name):
+        self.__name = name
 
     def get_x(self):
         return self.__x
@@ -55,6 +61,24 @@ class Adventurer():
     def add_pillar(self, pillar):
         if pillar not in self.__pillars:
             self.__pillars.append(pillar)
+
+    def get_number_vaccine(self):
+        return self.__number_vaccine
+
+    def set_number_vaccine(self, vaccines):
+        self.__number_vaccine += vaccines
+
+    def get_number_vision_potion(self):
+        return self.__number_vision_potion
+
+    def set_number_vision_potion(self, potions):
+        self.__number_vision_potion += potions
+
+    def get_number_pillars(self):
+        return self.__pillars
+
+    def add_pillar(self, pillar_to_add):
+        self.__pillars.append(pillar_to_add)
 
     def die(self):
         self.__dungeon_adventure.remove_observer()
