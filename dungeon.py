@@ -36,30 +36,31 @@ class Dungeon(Observable):
     def draw_maze(self):
         for y in range(self.__rows):
             for x in range(self.__cols):
-                if self.__map.get_room(y, x).get_value() == 0:
-                    self.draw_cell(y, x)
-                elif self.__map.get_room(y, x).get_value() == 1:
-                    self.draw_cell(y, x, "#525288")
-                    """blue"""
-                elif self.__map.get_room(y, x).get_value() == 2:
-                    self.draw_cell(y, x, "#eee83f")
-                    """yellow"""
-                elif self.__map.get_room(y, x).get_value() == 3:
-                    self.draw_cell(y, x, "#cf52eb")
-                    """purple"""
-                elif self.__map.get_room(y, x).get_value() == 4:
-                    self.draw_cell(y, x, "#ee3f4d")
-                    """red"""
-                elif self.__map.get_room(y, x).get_value() == 5:
-                    self.draw_cell(y, x, "#ee3f4d")
-                elif self.__map.get_room(y, x).get_value() == 6:
-                    self.draw_cell(y, x, "#ee3f4d")
-                elif self.__map.get_room(y, x).get_value() == 7:
-                    self.draw_cell(y, x, "#ee3f4d")
-                elif self.__map.get_room(y, x).get_value() == 8:
-                    self.draw_cell(y, x, "#ee3f4d")
-                elif self.__map.get_room(y, x).get_value() == 9:
-                    self.draw_cell(y, x, "#ee3f4d")
+                self.draw_cell(y, x)
+                # if self.__map.get_room(y, x).get_value() == 0:
+                #     self.draw_cell(y, x)
+                # elif self.__map.get_room(y, x).get_value() == 1:
+                #     self.draw_cell(y, x, "#525288")
+                #     """blue"""
+                # elif self.__map.get_room(y, x).get_value() == 2:
+                #     self.draw_cell(y, x, "#eee83f")
+                #     """yellow"""
+                # elif self.__map.get_room(y, x).get_value() == 3:
+                #     self.draw_cell(y, x, "#cf52eb")
+                #     """purple"""
+                # elif self.__map.get_room(y, x).get_value() == 4:
+                #     self.draw_cell(y, x, "#ee3f4d")
+                #     """red"""
+                # elif self.__map.get_room(y, x).get_value() == 5:
+                #     self.draw_cell(y, x, "#ee3f4d")
+                # elif self.__map.get_room(y, x).get_value() == 6:
+                #     self.draw_cell(y, x, "#ee3f4d")
+                # elif self.__map.get_room(y, x).get_value() == 7:
+                #     self.draw_cell(y, x, "#ee3f4d")
+                # elif self.__map.get_room(y, x).get_value() == 8:
+                #     self.draw_cell(y, x, "#ee3f4d")
+                # elif self.__map.get_room(y, x).get_value() == 9:
+                #     self.draw_cell(y, x, "#ee3f4d")
 
     def get_cols(self):
         return self.__cols

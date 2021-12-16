@@ -15,6 +15,43 @@ class DungeonController:
     def get_dungeon(self):
         return self.__dungeon
 
+    def draw_hero_surround(self):
+        move = self.__dungeon.get_movement_list()[-1]
+        hero_south = self.__dungeon.get_map().get_room(move.get_y() + 1, move.get_x())
+        hero_north = self.__dungeon.get_map().get_room(move.get_y() - 1, move.get_x())
+        hero_east = self.__dungeon.get_map().get_room(move.get_y(), move.get_x() + 1)
+        hero_west = self.__dungeon.get_map().get_room(move.get_y(), move.get_x() - 1)
+        hero_surrounding = []
+        hero_surrounding.append(hero_west)
+        hero_surrounding.append(hero_east)
+        hero_surrounding.append(hero_north)
+        hero_surrounding.append(hero_south)
+        for room in hero_surrounding:
+            if room.get_value() == 0:
+                self.__dungeon.draw_cell(room.get_y(), room.get_x())
+            elif room.get_value() == 1:
+                self.__dungeon.draw_cell(room.get_y(), room.get_x(), "#525288")
+                """blue"""
+            elif room.get_value() == 2:
+                self.__dungeon.draw_cell(room.get_y(), room.get_x(), "#eee83f")
+                """yellow"""
+            elif room.get_value() == 3:
+                self.__dungeon.draw_cell(room.get_y(), room.get_x(), "#cf52eb")
+                """purple"""
+            elif room.get_value() == 4:
+                self.__dungeon.draw_cell(room.get_y(), room.get_x(), "#ee3f4d")
+                """red"""
+            elif room.get_value() == 5:
+                self.__dungeon.draw_cell(room.get_y(), room.get_x(), "#ee3f4d")
+            elif room.get_value() == 6:
+                self.__dungeon.draw_cell(room.get_y(), room.get_x(), "#ee3f4d")
+            elif room.get_value() == 7:
+                self.__dungeon.draw_cell(room.get_y(), room.get_x(), "#ee3f4d")
+            elif room.get_value() == 8:
+                self.__dungeon.draw_cell(room.get_y(), room.get_x(), "#ee3f4d")
+            elif room.get_value() == 9:
+                self.__dungeon.draw_cell(room.get_y(), room.get_x(), "#ee3f4d")
+
     def draw_hero(self):
         hero_move = self.__dungeon.get_movement_list()[-1]
         pre_move = self.__dungeon.get_movement_list()[-2]
@@ -60,6 +97,7 @@ class DungeonController:
             self.__dungeon.get_hero().set_x(x - 1)
             self.__dungeon.get_movement_list().append(room)
             self.room_info()
+            self.draw_hero_surround()
             self.draw_hero()
             print("west", "y", y, "x", x, room.get_value())
         else:
@@ -74,6 +112,7 @@ class DungeonController:
             self.__dungeon.get_hero().set_x(x + 1)
             self.__dungeon.get_movement_list().append(room)
             self.room_info()
+            self.draw_hero_surround()
             self.draw_hero()
             print("east", "y", y, "x", x, room.get_value())
         else:
@@ -88,6 +127,7 @@ class DungeonController:
             self.__dungeon.get_hero().set_y(y + 1)
             self.__dungeon.get_movement_list().append(room)
             self.room_info()
+            self.draw_hero_surround()
             self.draw_hero()
             print("south", "y", y, "x", x, room.get_value())
         else:
@@ -103,6 +143,7 @@ class DungeonController:
             self.__dungeon.get_movement_list().append(room)
             print("north", "y", y, "x", x, room.get_value())
             self.room_info()
+            self.draw_hero_surround()
             self.draw_hero()
         else:
             return
