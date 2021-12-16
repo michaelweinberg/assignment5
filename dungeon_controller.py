@@ -13,6 +13,9 @@ class DungeonController:
         # self.__dungeon.get_hero() = Adventurer(self.__dungeon.get_map().start_point.get_y(), self.__dungeon.get_map().start_point.get_x())
         # self.__dungeon.__dungeon_adventure = dungeon_adventure
 
+    def get_dungeon(self):
+        return self.__dungeon
+
     def draw_hero(self):
         hero_move = self.__dungeon.get_movement_list()[-1]
         pre_move = self.__dungeon.get_movement_list()[-2]
