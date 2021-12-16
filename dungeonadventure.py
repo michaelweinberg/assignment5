@@ -3,6 +3,7 @@ from tkinter import BOTTOM, TOP
 from tkinter import LEFT
 from tkinter import *
 from tkinter import messagebox
+from tkinter.simpledialog import askstring
 
 from PIL import Image, ImageTk
 
@@ -40,6 +41,7 @@ def start_game():
                                f'Your mission is to collect all 4 pillars of OO and stay alive!\n'
                           )
         label2.grid(row=3,column=0)
+        top.destroy()
         #start_canvas.create_window(200, 230, window=label2)
 
     top = tk.Toplevel(windows)
@@ -59,6 +61,7 @@ def start_game():
 
     button1 = tk.Button(top_frame, text='Please enter your name, adventurer:  ', command=lambda: get_input(entry1))
     button1.grid(row=2, column=0)
+
 
 if __name__ == "__main__":
     cell_width = 40
