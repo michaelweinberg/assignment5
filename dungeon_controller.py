@@ -13,6 +13,9 @@ class DungeonController:
         # self.__dungeon.get_hero() = Adventurer(self.__dungeon.get_map().start_point.get_y(), self.__dungeon.get_map().start_point.get_x())
         # self.__dungeon.__dungeon_adventure = dungeon_adventure
 
+    def get_dungeon(self):
+        return self.__dungeon
+
     def draw_hero(self):
         hero_move = self.__dungeon.get_movement_list()[-1]
         pre_move = self.__dungeon.get_movement_list()[-2]
@@ -105,7 +108,7 @@ class DungeonController:
             self.__dungeon.get_hero().add_pillar("polymorphism")
             hero_move.set_value(0)
         if hero_move.get_value() == 4:
-            self.__dungeon.get_hero().add_health()
+            self.__dungeon.get_hero().add_vaccine()
         if hero_move.get_value() == 5:
             self.__dungeon.get_hero().min_health()
             if self.__dungeon.get_hero().get_health() <= 0:
@@ -142,7 +145,6 @@ class DungeonController:
                                                                     f"If it is a pit, you fall in and lose 50 health points.")
 
         if current_room.get_value() == 5:
-            self.__dungeon.get_hero().min_health()
             if self.__dungeon.get_hero().get_health() <= 0:
                 messagebox.showinfo("Game Over!", f"Your health points have fallen below 0.\n"
                                                   f"You have died.  Please exit out of the game!")
