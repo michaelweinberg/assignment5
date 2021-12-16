@@ -35,8 +35,8 @@ class Adventurer():
         return self.__health
 
     def add_health(self):
-        self.__health += 10
-        print("Health plus", self.__health)
+        self.__health += 10 * self.__number_vaccine
+        self.__number_vaccine = 0
 
     def min_health(self):
         self.__health -= 50

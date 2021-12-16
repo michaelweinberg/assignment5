@@ -51,7 +51,7 @@ class Dungeon(Observable):
                     self.draw_cell(y, x, "#ee3f4d")
                     """red"""
                 elif self.__map.get_room(y, x).get_value() == 5:
-                    self.draw_cell(y, x, "#808080")
+                    self.draw_cell(y, x, "#ee3f4d")
                 elif self.__map.get_room(y, x).get_value() == 6:
                     self.draw_cell(y, x, "#ee3f4d")
                 elif self.__map.get_room(y, x).get_value() == 7:
