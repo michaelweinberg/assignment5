@@ -1,5 +1,4 @@
 import tkinter as tk
-from dungeon import Dungeon
 from adventurer import Adventurer
 from tkinter import messagebox
 # from dungeonadventure import DungeonAdventure
@@ -37,8 +36,14 @@ class DungeonController:
         if self.__dungeon.get_movement_list()[-1] == self.__dungeon.get_map().destination:
             if self.__dungeon.get_hero().get_pillars():
                 print("Congratulations!")
+                messagebox.showinfo("Room Info", f"{self.__dungeon.get_hero().get_name()}\n"
+                                                 f"Congratulations!!!\n"
+                                                 f"You have found all the pillars and reach the end!\n"
+                                                 f"You Win!!!\n")
                 exit()
             else:
+                messagebox.showinfo("Room Info", f"{self.__dungeon.get_hero().get_name()}\n"
+                                                 f"You have not found all the pillars yet!\n")
                 print("not enough pillars")
         elif self.__dungeon.get_hero().get_health() <= 0:
             print("hero is dead!")
@@ -137,12 +142,12 @@ class DungeonController:
             room_description = "Exit"
         elif current_room.get_value() == 4:
             room_description = "Vaccine"
-            messagebox.showinfo("Room Info", f"{self.__dungeon.get_hero().get_name()} Your Room Has:\n"
+            messagebox.showinfo("Room Info", f"{self.__dungeon.get_hero().get_name()} This Room Has:\n"
                                              f"{room_description}\n"
                                              f"your can use it to increase your health.")
         elif current_room.get_value() == 5:
             room_description = "Pit of People"
-            messagebox.showinfo("Room Info", f"{self.__dungeon.get_hero().get_name()} Your Room Has:\n"
+            messagebox.showinfo("Room Info", f"{self.__dungeon.get_hero().get_name()} This Room Has:\n"
                                              f"{room_description}\n"
                                              f"your health will decrease by 50.")
             if self.__dungeon.get_hero().get_health() <= 0:
@@ -151,19 +156,19 @@ class DungeonController:
                 self.check_reach()
         elif current_room.get_value() == 6:
             room_description = "Pillar:  Abstraction"
-            messagebox.showinfo("Room Info", f"{self.__dungeon.get_hero().get_name()} Your Room Has:\n"
+            messagebox.showinfo("Room Info", f"{self.__dungeon.get_hero().get_name()} This Room Has:\n"
                                              f"{room_description}")
         elif current_room.get_value() == 7:
             room_description = "Pillar:  Encapsulation"
-            messagebox.showinfo("Room Info", f"{self.__dungeon.get_hero().get_name()} Your Room Has:\n"
+            messagebox.showinfo("Room Info", f"{self.__dungeon.get_hero().get_name()} This Room Has:\n"
                                              f"{room_description}")
         elif current_room.get_value() == 8:
             room_description = "Pillar:  Inheritance"
-            messagebox.showinfo("Room Info", f"{self.__dungeon.get_hero().get_name()} Your Room Has:\n"
+            messagebox.showinfo("Room Info", f"{self.__dungeon.get_hero().get_name()} This Room Has:\n"
                                              f"{room_description}")
         elif current_room.get_value() == 9:
             room_description = "Pillar:  Polymorphism"
-            messagebox.showinfo("Room Info", f"{self.__dungeon.get_hero().get_name()} Your Room Has:\n"
+            messagebox.showinfo("Room Info", f"{self.__dungeon.get_hero().get_name()} This Room Has:\n"
                                              f"{room_description}")
 
         # messagebox.showinfo("Room Info", f"{self.__dungeon.get_hero().get_name()} Your Room Has:\n"

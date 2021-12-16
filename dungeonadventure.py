@@ -59,7 +59,7 @@ def start_game():
     entry1 = tk.Entry(top_frame)
     entry1.grid(row=1, column=0)
 
-    button1 = tk.Button(top_frame, text='Please enter your name, adventurer:  ', command=lambda: get_input(entry1))
+    button1 = tk.Button(top_frame, text='Please confirm your name, adventurer!', command=lambda: get_input(entry1))
     button1.grid(row=2, column=0)
 
 
