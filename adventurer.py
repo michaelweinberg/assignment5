@@ -65,8 +65,8 @@ class Adventurer():
     def get_number_vaccine(self):
         return self.__number_vaccine
 
-    def set_number_vaccine(self, vaccines):
-        self.__number_vaccine += vaccines
+    def add_vaccine(self):
+        self.__number_vaccine += 1
 
     def get_number_vision_potion(self):
         return self.__number_vision_potion

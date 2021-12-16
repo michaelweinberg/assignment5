@@ -166,12 +166,11 @@ if __name__ == "__main__":
              font="Times", command=dc.room_info).grid(row=0, column=0)
 
     def hero_stats():
-        global adventurer_name
         messagebox.showinfo("Hero Stats",
-                            f"{adventurer_name} Your Hero Stats are:\nHealth Points: {hero.get_health()}\n"
-                            f"Number of Vaccines:  {hero.get_number_vaccine()}\n"
-                            f"Number of Vision Potions:  {hero.get_number_vision_potion()}\n"
-                            f"Pillars of OO Collected:  {hero.get_number_pillars()}")
+                            f"{dc.get_dungeon().get_hero().get_name()} Your Hero Stats are:\nHealth Points: {dungeon.get_hero().get_health()}\n"
+                            f"Number of Vaccines:  {dc.get_dungeon().get_hero().get_number_vaccine()}\n"
+                            f"Number of Vision Potions:  {dc.get_dungeon().get_hero().get_number_vision_potion()}\n"
+                            f"Pillars of OO Collected:  {dc.get_dungeon().get_hero().get_number_pillars()}")
 
     tk.Button(frame_right,
              text="Hero Stats",
