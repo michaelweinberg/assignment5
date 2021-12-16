@@ -40,6 +40,11 @@ class DungeonController:
                 exit()
             else:
                 print("not enough pillars")
+        elif self.__dungeon.get_hero().get_health() <= 0:
+            print("hero is dead!")
+            messagebox.showinfo("Room Info", f"{self.__dungeon.get_hero().get_name()}\n"
+                                             f"Game Over!Your health points have fallen below 0.\n")
+            exit()
 
     def move_west(self):
         x = self.__dungeon.get_hero().get_x()
@@ -49,6 +54,7 @@ class DungeonController:
         if self.__dungeon.get_map().is_movable(room):
             self.__dungeon.get_hero().set_x(x - 1)
             self.__dungeon.get_movement_list().append(room)
+            self.room_info()
             self.draw_hero()
             print("west", "y", y, "x", x, room.get_value())
         else:
@@ -62,6 +68,7 @@ class DungeonController:
         if self.__dungeon.get_map().is_movable(room):
             self.__dungeon.get_hero().set_x(x + 1)
             self.__dungeon.get_movement_list().append(room)
+            self.room_info()
             self.draw_hero()
             print("east", "y", y, "x", x, room.get_value())
         else:
@@ -75,6 +82,7 @@ class DungeonController:
         if self.__dungeon.get_map().is_movable(room):
             self.__dungeon.get_hero().set_y(y + 1)
             self.__dungeon.get_movement_list().append(room)
+            self.room_info()
             self.draw_hero()
             print("south", "y", y, "x", x, room.get_value())
         else:
@@ -89,6 +97,7 @@ class DungeonController:
             self.__dungeon.get_hero().set_y(y - 1)
             self.__dungeon.get_movement_list().append(room)
             print("north", "y", y, "x", x, room.get_value())
+            self.room_info()
             self.draw_hero()
         else:
             return
@@ -119,35 +128,55 @@ class DungeonController:
         #currently not showing there's a potion there after you enter the room - hero already scooped it and then the display is showing no potion
         current_room = self.__dungeon.get_map().get_room(self.__dungeon.get_hero().get_y(), self.__dungeon.get_hero().get_x())
         if current_room.get_value() == 0:
-            room_description = "Nothing"
+            return None
+            # room_description = "Nothing"
         elif current_room.get_value() == 2:
             room_description = "Entrance/Start"
+            return None
         elif current_room.get_value() == 3:
             room_description = "Exit"
         elif current_room.get_value() == 4:
             room_description = "Vaccine"
+            messagebox.showinfo("Room Info", f"{self.__dungeon.get_hero().get_name()} Your Room Has:\n"
+                                             f"{room_description}\n"
+                                             f"your can use it to increase your health.")
         elif current_room.get_value() == 5:
             room_description = "Pit of People"
-        elif current_room.get_value() == 6:
-            room_description = "Pillar:  Abstraction"
-        elif current_room.get_value() == 7:
-            room_description = "Pillar:  Encapsulation"
-        elif current_room.get_value() == 8:
-            room_description = "Pillar:  Inheritance"
-        elif current_room.get_value() == 9:
-            room_description = "Pillar:  Polymorphism"
-
-        messagebox.showinfo("Room Info", f"{self.__dungeon.get_hero().get_name()} Your Room Has:\n"
-                                      f"{room_description}")
-
-        if current_room.get_value() >= 4:
-            messagebox.showinfo("There is something in this room!", f"You use/pick up this item.\n"
-                                                                    f"If it is a pit, you fall in and lose 50 health points.")
-
-        if current_room.get_value() == 5:
+            messagebox.showinfo("Room Info", f"{self.__dungeon.get_hero().get_name()} Your Room Has:\n"
+                                             f"{room_description}\n"
+                                             f"your health will decrease by 50.")
             if self.__dungeon.get_hero().get_health() <= 0:
                 messagebox.showinfo("Game Over!", f"Your health points have fallen below 0.\n"
                                                   f"You have died.  Please exit out of the game!")
+                self.check_reach()
+        elif current_room.get_value() == 6:
+            room_description = "Pillar:  Abstraction"
+            messagebox.showinfo("Room Info", f"{self.__dungeon.get_hero().get_name()} Your Room Has:\n"
+                                             f"{room_description}")
+        elif current_room.get_value() == 7:
+            room_description = "Pillar:  Encapsulation"
+            messagebox.showinfo("Room Info", f"{self.__dungeon.get_hero().get_name()} Your Room Has:\n"
+                                             f"{room_description}")
+        elif current_room.get_value() == 8:
+            room_description = "Pillar:  Inheritance"
+            messagebox.showinfo("Room Info", f"{self.__dungeon.get_hero().get_name()} Your Room Has:\n"
+                                             f"{room_description}")
+        elif current_room.get_value() == 9:
+            room_description = "Pillar:  Polymorphism"
+            messagebox.showinfo("Room Info", f"{self.__dungeon.get_hero().get_name()} Your Room Has:\n"
+                                             f"{room_description}")
+
+        # messagebox.showinfo("Room Info", f"{self.__dungeon.get_hero().get_name()} Your Room Has:\n"
+        #                               f"{room_description}")
+        #
+        # if current_room.get_value() >= 4:
+        #     messagebox.showinfo("There is something in this room!", f"You use/pick up this item.\n"
+        #                                                             f"If it is a pit, you fall in and lose 50 health points.")
+        #
+        # if current_room.get_value() == 5:
+        #     if self.__dungeon.get_hero().get_health() <= 0:
+        #         messagebox.showinfo("Game Over!", f"Your health points have fallen below 0.\n"
+        #                                           f"You have died.  Please exit out of the game!")
 
 
 
