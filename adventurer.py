@@ -9,7 +9,7 @@ class Adventurer():
         self.__y = y
         self.__health = 100
         self.__is_dead = False
-        self.__number_vaccine = 0
+        self.__number_health_potion = 0
         self.__number_vision_potion = 0
         self.__pillars = []
 
@@ -34,9 +34,12 @@ class Adventurer():
     def get_health(self):
         return self.__health
 
+    def add_potion(self):
+        pass
+
     def add_health(self):
-        self.__health += 10
-        print("Health plus", self.__health)
+        self.__health += 10 * self.__number_health_potion
+
 
     def min_health(self):
         self.__health -= 50
@@ -44,13 +47,13 @@ class Adventurer():
         print("Health minus", self.__health)
         if self.__health <= 0:
             print("Our hero is dead")
-    # def set_vaccine_points(self, vaccine_points):
-    #     self.__number_vaccine += vaccine_points
+    # def set_health_potion_points(self, health_potion_points):
+    #     self.__number_health_potion += health_potion_points
     #
-    # def use_vaccine(self):
-    #     # currently just use all the vaccine, could change this
-    #     self.__health += self.__number_vaccine
-    #     self.__number_vaccine = 0
+    # def use_health_potion(self):
+    #     # currently just use all the health_potion, could change this
+    #     self.__health += self.__number_health_potion
+    #     self.__number_health_potion = 0
 
     def get_pillars(self):
         if len(self.__pillars) == 4:
@@ -62,11 +65,11 @@ class Adventurer():
         if pillar not in self.__pillars:
             self.__pillars.append(pillar)
 
-    def get_number_vaccine(self):
-        return self.__number_vaccine
+    def get_number_health_potion(self):
+        return self.__number_health_potion
 
-    def set_number_vaccine(self, vaccines):
-        self.__number_vaccine += vaccines
+    def add_health_potion(self):
+        self.__number_health_potion += 1
 
     def get_number_vision_potion(self):
         return self.__number_vision_potion
