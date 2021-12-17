@@ -1,4 +1,3 @@
-from observer import Observer
 
 class Adventurer():
 
@@ -80,9 +79,9 @@ class Adventurer():
     def add_pillar(self, pillar_to_add):
         self.__pillars.append(pillar_to_add)
 
-    def die(self):
-        self.__dungeon_adventure.remove_observer()
-        print("Our hero has died")
+    # def die(self):
+    #     self.__dungeon_adventure.remove_observer()
+    #     print("Our hero has died")
 
     # def hero_move(self, moves):
     #     hero_move = moves[-1]

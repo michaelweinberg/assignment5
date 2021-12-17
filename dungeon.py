@@ -1,9 +1,8 @@
 from adventurer import Adventurer
 from map import Map
-from observable import Observable
 
 
-class Dungeon(Observable):
+class Dungeon():
     def __init__(self, cols, rows, canvas):
         self.__cols = cols
         self.__rows = rows
