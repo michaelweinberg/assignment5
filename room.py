@@ -1,3 +1,6 @@
+"""Child class of Map.  This class holds all attributes that could be present in a room and getter and setters to
+access those attributes"""
+
 class Room:
     def __init__(self, y, x):
         self.__coordinate_x = x

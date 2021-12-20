@@ -1,4 +1,6 @@
 
+"""Child class of the Dungeon model where we define our adventure and initiate health, vaccines points, list of pillars
+collected and position within the Map"""
 class Adventurer():
 
     def __init__(self, y, x):

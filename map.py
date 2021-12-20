@@ -4,7 +4,9 @@ from adventurer import Adventurer
 from map_entry_type import Map_entry_type
 from room import Room
 
-
+"""Builder class to randomly generate a Map object to be used in the dungeon model given a specified width and height.  
+The Map is composed of a set of Room objects and will always be traversable.  All logic for how the rooms are created
+and organized resides within this class"""
 class Map:
     def __init__(self, width, height):
         self.__width = width

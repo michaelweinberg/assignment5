@@ -3,7 +3,8 @@ from adventurer import Adventurer
 from tkinter import messagebox
 # from dungeonadventure import DungeonAdventure
 
-
+"""Controller class which provides the main logic to facilitate communication between the view code in Dungeon Adventure
+and the Dungeon model class. Most actions initiated from the Dungeon Adventure view are defined here"""
 class DungeonController:
 
     def __init__(self, dungeon, adventure):
