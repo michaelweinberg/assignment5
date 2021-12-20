@@ -20,6 +20,9 @@ import copy
 import math
 from dungeon_controller import DungeonController
 
+
+"""This file contains all view code and visual layout logic for our program.  All visual components are defined here
+as well as function calls for the buttons"""
 class View:
 
     @staticmethod

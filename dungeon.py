@@ -1,7 +1,9 @@
 from adventurer import Adventurer
 from map import Map
 
-
+"""This class functionas as the main model of the program.  In this class we create all child component classes 
+needed to execute the program - On init we create the map for our dungeon by creating a randomly generated Map
+and a hero (Adventurer) object to traverse the Map."""
 class Dungeon():
     def __init__(self, cols, rows, canvas):
         self.__cols = cols
